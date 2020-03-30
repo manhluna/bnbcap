@@ -25,7 +25,7 @@ module.exports = (io,siofu) => {
                 await db.user({'info.email': data}, {
                     "info.token_recover": curUser[0].id + seed1 + curUser[0].id + seed2
                 })
-                const link = `http://${process.env.host}:${process.env.http_port}/recover/${curUser[0].id + seed1 + curUser[0].id + seed2}`
+                const link = `https://${process.env.host}/recover/${curUser[0].id + seed1 + curUser[0].id + seed2}`
                 const text = `
                     <h3>Recover password Link</h3>
                     <p>Please click the link below to complete recover password process</p>
