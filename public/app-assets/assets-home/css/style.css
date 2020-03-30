@@ -188,7 +188,7 @@ ol {
     color: #fff
 }
 .header-area.sticky .light.classy-nav-container a{
-    color: #333
+    color: #fffbfb;
 }
 .header-area.sticky .classy-navbar-toggler .navbarToggler span{
     background: #333 !important
@@ -835,7 +835,7 @@ ol {
 .header-area.sticky {
     -webkit-transition-duration: 500ms;
     transition-duration: 500ms;
-    background-color: #d7dfef;
+    background-color: #011846;
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
     border-bottom: none;
 }
@@ -4411,9 +4411,9 @@ body.light-version {
     border-bottom-color: rgba(255, 255, 255, 0.2) !important 
 }
 .light-version .demo-video{
-    background: linear-gradient(to right, #4834d4, #341f97);
+    background: linear-gradient(to right, #090140, #030010);
     overflow: hidden;
-    border-top: 1px solid #eee
+    border-top: 1px solid #eee;
 }
 .light-version .demo-video p{
     color: rgba(255,255,255,.7)

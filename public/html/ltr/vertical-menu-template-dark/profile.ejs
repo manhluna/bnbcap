@@ -87,7 +87,7 @@
                                                         <img src="../../../app-assets/images/user.png" class="rounded mr-75" alt="profile image" height="64" width="64">
                                                     </a>
                                                     <div class="media-body mt-75">
-                                                        <p class="text-white ml-75 mt-50"><%= first_name %></p>
+                                                        <p class="text-white ml-75 mt-50" id="name-top"><%= username %></p>
                                                     </div>
                                                 </div>
                                                 <hr>
@@ -97,16 +97,8 @@
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <div class="controls">
-                                                                    <label for="account-username">First Name</label>
-                                                                    <input type="text" class="form-control" id="account-Fname" placeholder="Enter Your First Name" value="<%= (first_name)? first_name: "" %>" required data-validation-required-message="This username field is required">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <div class="controls">
-                                                                    <label for="account-name">Last Name</label>
-                                                                    <input type="text" class="form-control" id="account-Lname" placeholder="Enter Your Last Name" value="<%= (last_name)? last_name: "" %>" required data-validation-required-message="This name field is required">
+                                                                    <label for="account-username">Username</label>
+                                                                    <input type="text" class="form-control" id="account-username" placeholder="Enter Your First Name" value="<%= username %>" required data-validation-required-message="This username field is required">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -133,12 +125,13 @@
                                             <div class="tab-pane fade " id="account-vertical-password" role="tabpanel" aria-labelledby="account-pill-password" aria-expanded="false">
                                                 <form novalidate>
                                                     <div class="row">
-                                                        <p class="col-12 textwarning" id="update-new-pass-success"></p>
+                                                        <p class="col-12 text-warning" id="update-new-pass-noti"></p>
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <div class="controls">
                                                                     <label for="account-old-password">Old Password</label>
                                                                     <input type="password" class="form-control" id="account-old-password" required placeholder="Old Password" data-validation-required-message="This old password field is required">
+                                                                    <input id="old-pass-cef" hidden>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -147,10 +140,11 @@
                                                                 <div class="controls">
                                                                     <label for="account-new-password">New Password</label>
                                                                     <input type="password" name="password" id="account-new-password" class="form-control" placeholder="New Password" required data-validation-required-message="The password field is required" minlength="6">
+                                                                    <input id="new-pass-cef" hidden>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <P id="check-update-pass"></P>
+                                                        <P class="col-12 text-white" id="check-update-pass"></P>
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <div class="controls">
@@ -161,7 +155,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                                            <a class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">Save</a>
+                                                            <a href="javascript: void(0);" id="btn-update-password" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">Save</a>
                                                         </div>
                                                     </div>
                                                 </form>

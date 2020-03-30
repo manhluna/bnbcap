@@ -6,8 +6,7 @@ const schemaUser = new Schema({
     role: {type: String, default: 'user'},
     // Thông tin cá nhân
     info: {
-        first_name: {type: String, default: 'No Name'},
-        last_name: {type: String, default: null},
+        username: {type: String, default: 'No Name'},
         email: {type: String, default: null},
         hash_password: {type: String, default: null},
         token_recover: {type: String, default: null},

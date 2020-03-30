@@ -19,12 +19,13 @@ module.exports = (io,siofu) => {
         //recover password
         socket.on('recover_pass', async (data) => {
             var curUser = await db.user({'info.email': data},'id')
-            var seed = Math.floor(Math.random() * 100)
+            var seed1 = Math.floor(Math.random() * 1000)
+            var seed2 = Math.floor(Math.random() * 1000)
             if (curUser){
                 await db.user({'info.email': data}, {
-                    "info.token_recover": curUser[0].id + curUser[0].id + seed
+                    "info.token_recover": curUser[0].id + seed1 + curUser[0].id + seed2
                 })
-                const link = `http://${process.env.host}:${process.env.http_port}/recover/${curUser[0].id + curUser[0].id + seed}`
+                const link = `http://${process.env.host}:${process.env.http_port}/recover/${curUser[0].id + seed1 + curUser[0].id + seed2}`
                 const text = `
                     <h3>Recover password Link</h3>
                     <p>Please click the link below to complete recover password process</p>
@@ -215,13 +216,11 @@ module.exports = (io,siofu) => {
 
         if(id !== ''){
             socket.on("account_update_general", async data=>{
-                const Fname = data.Fname
-                const Lname = data.Lname
                 const company = data.company
+                const username = data.username
                 await db.user({id: id}, {
-                    "info.first_name": Fname,
-                    "info.last_name": Lname,
-                    "info.company": company
+                    "info.company": company,
+                    "info.username": username
                 })
                 socket.emit("update_account_general_success", "Update General Information succeed")
             })

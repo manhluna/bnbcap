@@ -197,56 +197,63 @@ $(document).ready(() => {
         })
     })
     socket.on("update_info_success", data=>{
+        $("#noti-update-info").html(data)
         setTimeout(()=>{
-            $("#noti-update-info").html(data)
-        }, 5000)
+            $("#noti-update-info").hide()
+        }, 3000)
     })
 
     $("#btn-update-password").click(()=>{
         var oldPass = $("#account-old-password").val()
+        var oPass = CryptoJS.MD5(oldPass)
+        $('#old-pass-cef').val(oPass)
         var newPass = $("#account-new-password").val()
+        var nPass = CryptoJS.MD5(newPass)
+        $('#new-pass-cef').val(nPass)
         socket.emit("account_update_password", {
-            oldPass,
-            newPass
+            oldPass: $('#old-pass-cef').val(),
+            newPass: $('#new-pass-cef').val()
         })
     })
-    $("#user-confirm-password").change(() => {
+    $("#account-retype-new-password").change(() => {
         var newPass = $("#account-new-password").val()
         var re_newPass = $("#account-retype-new-password").val()
-        if (re_newPass == newPass){
+        if (re_newPass == newPass){          
             setTimeout(()=>{
                 $("#check-update-pass").html('Password matched')
-            },5000)
+            },3000)
         } else {
             setTimeout(()=>{
                 $("#check-update-pass").html('Password does not match')
-            },5000)
+            },3000)
         }
     })
 
     $("#btn-update-general").click(()=>{
+        var username = $('#account-username').val()
         var company = $("#account-company").val()
-        var Lname = $("#account-Lname").val()
-        var Fname = $("#account-Fname").val()
         socket.emit("account_update_general", {
             company,
-            Lname,
-            Fname
+            username
         })
     })
     socket.on("update_account_general_success", data=>{
+        $("#noti-update-general").html(data)
+        $()
         setTimeout(()=>{
-            $("#noti-update-general").html(data)
-        }, 5000)
+            $("#noti-update-general").hide()
+        }, 3000)
     })
     socket.on("update_account_pass_success", data=>{
+        $("#update-new-pass-noti").html(data)
         setTimeout(()=>{
-            $("#update-new-pass-success").html(data)
-        }, 5000)
+            $("#update-new-pass-noti").hide()
+        }, 3000)
     })
     socket.on("old_pass_wrong", data=>{
+        $("#update-new-pass-noti").html(data)
         setTimeout(()=>{
-            $("#update-new-pass-success").html(data)
-        }, 5000)
+            $("#update-new-pass-noti").hide()
+        }, 3000)
     })
 })

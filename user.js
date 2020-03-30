@@ -89,7 +89,7 @@ module.exports = (app) => {
                 id: doc[0].id
             }
             res.render('dashboard', {
-                first_name: doc[0].info.first_name,
+                username: doc[0].info.username,
                 dashboard: dashboard,
                 title: "BNB Capital | Dashboard"
             })
@@ -130,7 +130,7 @@ module.exports = (app) => {
                     }
                     res.render('dashboard', {
                         dashboard: dashboard,
-                        first_name: doc[0].info.first_name,
+                        username: doc[0].info.username,
                         title: "BNB Capital | Dashboard"
                     })
                 } else {
@@ -166,7 +166,7 @@ module.exports = (app) => {
             }
             res.render('dashboard', {
                 dashboard: dashboard,
-                first_name: doc[0].info.email.first_name,
+                username: doc[0].info.email.username,
                 title: "BNB Capital | Dashboard"
             })
         } else {
@@ -193,7 +193,7 @@ module.exports = (app) => {
             const currencies = user[0].currency
             res.render('balance', {
                 currencies: currencies,
-                first_name: user[0].info.first_name ,
+                username: user[0].info.username ,
                 title: "BNB Capital | Balance"
             })    
         } else {
@@ -208,7 +208,7 @@ module.exports = (app) => {
             const histories = user[0].history
             res.render('history', {
                 histories: histories,
-                first_name: user[0].info.first_name,
+                username: user[0].info.username,
                 title: "BNB Capital | History"
             })
         } else {
@@ -221,7 +221,7 @@ module.exports = (app) => {
             const id = decId(getId(req,''))
             var user = await db.user({id: id}, 'info')
             res.render('tree',{
-                first_name: user[0].info.first_name,
+                username: user[0].info.username,
                 title: "BNB Capital | Network Tree"
             })
         } else {
@@ -233,7 +233,7 @@ module.exports = (app) => {
             const id = decId(getId(req,''))
             var user = await db.user({id: id}, 'info')
             res.render('policy',{
-                first_name: user[0].info.first_name,
+                username: user[0].info.username,
                 title: "BNB Capital | Policy And Documents"
             })
         } else {
@@ -245,8 +245,7 @@ module.exports = (app) => {
             const id = decId(getId(req,''))
             var user = await db.user({id: id}, 'info')
             res.render('profile',{
-                first_name: user[0].info.first_name ,
-                last_name: user[0].info.last_name,
+                username: user[0].info.username ,
                 company: user[0].info.company,
                 tel: user[0].info.tel,
                 country: user[0].info.country,
@@ -280,7 +279,7 @@ module.exports = (app) => {
             res.render('member', {
                 detail: tab.detail,
                 diagram: tab.diagram,
-                first_name: user[0].info.first_name,
+                username: user[0].info.username,
                 title: "BNB Capital | Network Member"
             })
         } else {

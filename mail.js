@@ -29,7 +29,10 @@ module.exports = (to, text) => {
         from: '"Binance Capital" <info@binance.capital>', // sender address (who sends)
         to: to, // list of receivers (who receives)
         subject: `subject`, // Subject line
-        html: `<b>Code:</b> <p>${text}</p>` // html body
+        html: `
+        <h3 style="color:yellow;">Verify Code for Login:</h3>
+        <br>
+        <b>Code:</b> <p>${text}</p>` // html body
     }
 
     // send mail with defined transport object
