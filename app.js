@@ -11,7 +11,6 @@ var morgan = require('morgan')
 const user = require('./user')
 // const admin = require('./admin')
 const socket = require('./socket')
-const capcha = require('./geetest')
 const Redis = require("ioredis")
 const redis = new Redis()
 const session = require('express-session')({
@@ -43,22 +42,8 @@ io.use(shared(session, { autoSave:true }))
 
 user(app)
 // admin(app)
-capcha(app)
 
 socket(io,siofu)
-
-//Chatbot
-const { bottender } = require('bottender')
-
-const botkit = bottender({})
-
-const handle = botkit.getRequestHandler()
-
-botkit.prepare().then(() => {
-  app.all('/webhooks/*', (req, res) => {
-    return handle(req, res)
-  })
-})
 
 const tunnel = async () => {
   await ngrok.connect({

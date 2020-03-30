@@ -5,7 +5,6 @@ const db = new DB()
 const {add_wallet, listener} = require('./wallet')
 const tree = require('./tree')
 const {encId, decId, getId} = require('./auth')
-const gg = require('./otp')
 const Redis = require("ioredis")
 const redis = new Redis()
 
