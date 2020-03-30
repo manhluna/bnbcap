@@ -62,7 +62,6 @@ module.exports = (app) => {
                 referral = process.env.root_Id
             }
             tree.add_node(id, referral, sign)
-            gg.add(id)
 
             req.session.user = {
                 id: encId(id),
