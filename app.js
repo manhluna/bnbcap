@@ -1,10 +1,19 @@
 require('dotenv').config()
+const fs = require('fs')
+const key = fs.readFileSync('bnb.key')
+const cert = fs.readFileSync( 'bnb.crt' )
+const options = {
+  key: key,
+  cert: cert,
+}
+
 const ngrok = require('ngrok')
 const siofu = require("socketio-file-upload")
 const express = require('express')
 const app = express()
 const http = require('http').createServer(app)
-const io = require('socket.io')(http)
+const https = require('https').createServer(options, app)
+const io = require('socket.io')(https)
 const bodyParser = require('body-parser')
 var responseTime = require('response-time')
 var morgan = require('morgan')
@@ -22,7 +31,9 @@ const session = require('express-session')({
 const tree = require('./tree')
 
 const shared = require("express-socket.io-session")
+var forceSsl = require('express-force-ssl')
 
+app.use(forceSsl)
 app.use(siofu.router)
 
 app.use(bodyParser.json({
@@ -56,10 +67,10 @@ const tunnel = async () => {
     onLogEvent: data => {},
   })
 }
-
+https.listen(443)
 http.listen(process.env.http_port || process.env.PORT, async ()=>{
   await redis.set("profit_day", "0.5")
   // await tunnel()
-  // tree.time()
+  tree.time()
   console.log(`Listening on HTTP Port: ${process.env.http_port}`)
 })
