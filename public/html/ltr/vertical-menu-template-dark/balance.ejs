@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title><%= title %></title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/tables/datatable/datatables.min.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.css">
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/colors/palette-gradient.css">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern dark-layout 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="dark-layout">
+    <%- include("header") -%>
+    <%- include("menu") -%>
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- Zero configuration table -->
+                <section id="basic-datatable">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Assets Wallet</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body card-dashboard">
+                                        <p class="card-text">Manage, Deposit, Withdraw your assets, please read the note to protect your assets.</p>
+                                        <div class="table-responsive">
+                                            <table class="table zero-configuration text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Logo</th>
+                                                        <th>Coin</th>
+                                                        <th>Name</th>
+                                                        <th>Total Balance</th>
+                                                        <th>Available Balance</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% currencies.forEach(function(currency){ %>
+                                                        <tr id="tr-<%= currency.symbol %>">
+                                                            <td><img src="<%= currency.logo %>" width="35" height="35" /></td>
+                                                            <td><%= currency.symbol %></td>
+                                                            <td><%= currency.coin %></td>
+                                                            <td><%= currency.balance.toFixed(2) %></td>
+                                                            <td id="zzz-<%= currency.symbol %>"><%= (currency.dep_profit + currency.mlm_profit).toFixed(2)  %></td>
+                                                            <td>
+                                                                <a href="#md-deposit-<%= currency.symbol %>" data-toggle="modal" class="btn btn-success" title="Deposit <%= currency.symbol %>">
+                                                                    <i class="fa fa-arrow-down"></i>
+                                                                </a>
+                                                                <a href="#md-withdraw-<%= currency.symbol %>" data-toggle="modal" class="btn btn-danger" title="Withdraw <%= currency.symbol %>">
+                                                                    <i class="fa fa-arrow-up"></i>
+                                                                </a>
+                                                                <!-- <a href="#md-swap-<%= currency.symbol %>" data-toggle="modal" class="btn btn-default m-r-5" title="Swap <%= currency.symbol %>">
+                                                                    <i class="fa fa-arrows-alt-h"></i>
+                                                                </a> -->
+                
+                                                                <!-- Begin Modal Deposit -->
+                                                                <div class="modal fade text-left" id="md-deposit-<%= currency.symbol %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title" id="myModalLabel33">Deposit <%= currency.symbol %> </h4>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <div class="modal-body">
+                                                                                <div class="row">
+                                                                                        <div class="col-md-4 col-sm-8 col-xs-8 offset-md-1 offset-sm-2 offset-xs-2 mt-2 mb-2 text-center" id="qr-<%= currency.symbol %>"></div>
+                                                                                        <div class="col-md-7 col-sm-12 col-xs-12 mb-2 mt-2">
+                                                                                            <div class="input-group">
+                                                                                                <input type="text" id="copy-<%= currency.symbol %>" value="<%= currency.address %>" class="form-control" aria-describedby="button-addon2" />
+                                                                                                <div class="input-group-append" id="button-addon2">
+                                                                                                    <a href="javascript:;" class="btn btn-primary" data-clipboard-target="#copy-<%= currency.symbol %>" id="btn-copy-<%= currency.symbol %>">Copy</a>
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                            <%if (currency.symbol == "BNB") { %>
+                                                                                                <br>
+                                                                                                <div class="input-group">
+                                                                                                    <input type="text" id="copy-memo" value="<%= currency.memo %>" class="form-control" aria-describedby="button-addon2" />
+                                                                                                    <div class="input-group-append" id="button-addon2">
+                                                                                                        <a href="javascript:;" class="btn btn-primary" data-clipboard-target="#copy-<%= currency.symbol %>" id="btn-copy-memo">Copy</a>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            <% } %>
+                                                                                            <p class="mt-1 text-center font-size-small">Send only <%= currency.symbol %> to this deposit address.</p>
+                                                                                            <img src="<%= currency.logo %>" width="60" class="mb-1 offset-5"/>
+                                                                                            <br>
+                                                                                        </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- Start DOM QR -->
+                                                                <script>
+                                                                    // https://larsjung.de/jquery-qrcode/latest/demo/
+                                                                    setTimeout(() => {
+                                                                        $('#qr-<%= currency.symbol %>').qrcode({
+                                                                            "render": "div",
+                                                                            "size": 180,
+                                                                            "color": "#3a3",
+                                                                            "text": "<%= currency.address %>",
+                                                                        })
+                                                                    }, 1000)													
+                                                                </script>
+                                                                <!-- End DOM QR -->
+                                                                <!-- End Modal Deposit -->
+                
+                                                                <!-- Begin Modal Withdraw -->
+                                                                    <div class="modal fade text-left" id="md-withdraw-<%= currency.symbol %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h4 class="modal-title" id="myModalLabel33">Withdraw <%= currency.symbol %> </h4>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <form action="#">
+                                                                                <div class="modal-body  ">
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-9 col-sm-12 col-xs-12">
+                                                                                            <label for="receive_address">Address: <span class="text-yellow" id="check-address-<%= currency.symbol %>"></span></label>
+                                                                                            <div class="form-group">
+                                                                                                <input type="text" name="receive_address" id="withdraw-address-<%= currency.symbol %>" class="form-control" />
+                                                                                            </div>
+                        
+                                                                                            <label for="receive_amount">Amount: <span class="text-yellow" id="check-amount-<%= currency.symbol %>"></span></label>
+                                                                                            <div class="form-group">
+                                                                                                <input type="text" name="receive_amount" id="withdraw-amount-<%= currency.symbol %>" class="form-control" />
+                                                                                                <br>
+                                                                                                <div class="row">
+                                                                                                    <div class="btn-group col-12">
+                                                                                                        <button type="button" class="btn btn-primary" data-percent='{"per": 25, "symbol": "<%= currency.symbol %>"}'>25%</button>
+                                                                                                        <button type="button" class="btn btn-primary" data-percent='{"per": 50, "symbol": "<%= currency.symbol %>"}'>50%</button>
+                                                                                                        <button type="button" class="btn btn-primary" data-percent='{"per": 75, "symbol": "<%= currency.symbol %>"}'>75%</button>
+                                                                                                        <button type="button" class="btn btn-primary" data-percent='{"per": 100, "symbol": "<%= currency.symbol %>"}'>100%</button>
+                                                                                                    </div>
+                                                                                                    <div class="mt-1 col-12 text-yellow text-left">Max: <span id="withdraw-max-<%= currency.symbol %>"><%= (currency.dep_profit + currency.mlm_profit).toFixed(2) %></span> <%= currency.symbol %></div>
+                                                                                                </div>
+                                                                                                <a href="javascript:;" class="btn btn-primary col-sm-4 col-xs-6 mt-2 pull-right" data-order='{"symbol": "<%= currency.symbol %>", "action": "withdraw"}'>Withdraw</a>
+
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div id="special-img" class="col-md-3 mt-3">                                                                                            
+                                                                                            <img src="<%= currency.logo %>" width="80" class="offset-2"/>
+                                                                                            <h3 class="mt-2 offset-3"><%= currency.symbol %></h3>
+                                                                                        </div>
+                                                                                        <style>
+                                                                                            @media (max-width: 600px){
+                                                                                                #special-img {
+                                                                                                    display: none;
+                                                                                                }
+                                                                                            }
+                                                                                        </style>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer col-12 text-left">
+                                                                                    <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Login</button> -->
+                                                                                </div>
+                                                                            </form>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- End Modal Withdraw -->
+                                                            </td>
+                                                        </tr>
+                                                    <% }) %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--/ Zero configuration table -->
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/datatables.buttons.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="../../../app-assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <script src="../../../app-assets/js/scripts/components.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="../../../app-assets/js/scripts/datatables/datatable.js"></script>
+    <!-- END: Page JS-->
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../luna/balance.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/copy-to-clipboard.js"></script>
+	<script src="../luna/jquery-qrcode-0.17.0.min.js"></script>
+
+</body>
+<!-- END: Body-->
+
+</html>

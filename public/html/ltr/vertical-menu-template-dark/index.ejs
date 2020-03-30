@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title><%= title %></title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="../../../favicon.png">
+
+    <!-- Core Stylesheet -->
+    <link rel="stylesheet" href="../../../app-assets/assets-home/css/style.css">
+
+    <!-- Responsive Stylesheet -->
+    <link rel="stylesheet" href="../../../app-assets/assets-home/css/responsive.css">
+
+</head>
+
+<body class="light-version">
+    <!-- Preloader -->
+    
+
+    
+    <!-- ##### Header Area Start ##### -->
+    <header class="header-area wow fadeInDown sticky" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;">
+        <div class="light classy-nav-container breakpoint-off dark left">
+            <div class="container">
+                <!-- Classy Menu -->
+                <nav class="classy-navbar justify-content-between" id="dreamNav">
+
+                    <!-- Logo -->
+                    <a class="nav-brand" href="#"><img src="../../../app-assets/assets-home/image/asset_39.png" class="logo-top" alt="logo"></a>
+
+                    <!-- Navbar Toggler -->
+                    <div class="classy-navbar-toggler">
+                        <span class="navbarToggler">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </span>
+                    </div>
+
+                    <!-- Menu -->
+                    <div class="classy-menu">
+
+                        <!-- close btn -->
+                        <div class="classycloseIcon">
+                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                        </div>
+
+                        <!-- Nav Start -->
+                        <div class="classynav">
+                            <ul id="nav">
+                                <li class=""><a href="#home">Home</a></li>
+                                <li class=""><a href="#about">About Us</a></li>
+                                <li class=""><a href="#system">Binance System</a></li>
+                                <li class=""><a href="#invest">Invest</a></li>
+                                <li class=""><a href="#partner">Partner</a></li>
+                                <li class=""><a href="#roadmap">Roadmap</a></li>
+                                <!-- <li><a href="#team">Team</a></li> -->
+                                <li class="active"><a href="#contact">Contact</a></li>
+                            </ul>
+                            <button class="btn btn-outline-info" data-toggle="modal" data-target="#policy">Policy</button>
+                        </div>
+                        <!-- Nav End -->
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- ##### Header Area End ##### -->
+    
+    <!-- ##### Welcome Area Start ##### -->
+    <section class="welcome_area clearfix dzsparallaxer auto-init none fullwidth mode-scroll animation-engine-js dzsprx-readyall" data-options="{direction: &quot;normal&quot;}" id="home" style="height: 524px;">
+        <div class="divimage dzsparallaxer--target" style="width: 101%; height: 130%; background-image: url(../../../app-assets/assets-home/img/bg-img/bg-4.png);"></div>
+
+        <!-- Hero Content -->
+        <div class="hero-content transparent">
+            <!-- blip -->
+            <div class="dream-blip blip1"></div>
+            <div class="dream-blip blip2"></div>
+            <div class="dream-blip blip3"></div>
+            <div class="dream-blip blip4"></div>
+
+            <div class="container h-100">
+                <div class="row h-100 align-items-center">
+                    <!-- Welcome Content -->
+                    <div class="col-12 col-lg-6 col-md-12">
+                        <div class="welcome-content">
+                            <h1 class="fadeInUp" data-wow-delay="0.2s">Trusted global digital
+                                trading platform</h1>
+                            <p class="w-text fadeInUp" data-wow-delay="0.3s">Binance Capital is the first digital money lending
+                                platform in the world on Binance Exchange. We
+                                generate stable profits from the growth of
+                                Cryptocurrency. You can make a profit every day
+                                when joining our community.</p>
+                            <div class="dream-btn-group fadeInUp" data-wow-delay="0.4s">
+                                <% if(isAuth == false){%>
+                                <a href="/login" class="btn dream-btn mr-3">Login</a>
+                                <a href="/register" class="btn dream-btn">Register</a>
+                                <%}else{%>
+                                <a href="/dashboard" class="btn dream-btn mr-3">Dashboard</a>
+                                <%}%>
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Welcome Area End ##### -->
+    
+    <div class="clearfix"></div>
+
+    <section class="features section-padding-100-0" style="padding-bottom:70px;background: url(../../../app-assets/assets-home/img/svg/bg_hero.svg) no-repeat center right;">
+
+        <div class="section-heading text-center">
+            <!-- Dream Dots -->
+            <div class="dream-dots justify-content-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <img src="../../../app-assets/assets-home/image/asset_11.png" alt="">
+            </div>
+            <h2 class="wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">Operation process</h2>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <!-- Content -->
+                    <div class="service_single_content box-shadow text-center mb-100 wow fadeInUp" data-wow-delay="0.2s" style="background: rgb(255, 255, 255); visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <!-- Icon -->
+                        <div class="service_icon">
+                            <img src="../../../app-assets/assets-home/image/asset_21.png" width="150px" alt="">
+                        </div>
+                        <h6>Invest</h6>
+                        <p>With automatic deposit
+                            and withdrawal system.
+                            We accept client's
+                            portfolio based on BTC,
+                            BNB.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <!-- Content -->
+                    <div class="service_single_content box-shadow text-center mb-100 wow wow fadeInUp" data-wow-delay="0.3s" style="background: rgb(255, 255, 255); visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                        <!-- Icon -->
+                        <div class="service_icon">
+                            <img src="../../../app-assets/assets-home/image/asset_31.png" width="150px" alt="">
+                        </div>
+                        <h6>Analysis</h6>
+                        <p>Our team will participate
+                            in market volatility
+                            analysis through Binance
+                            Exchange and Bitfinex
+                            Exchange.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <!-- Content -->
+                    <div class="service_single_content box-shadow text-center mb-100 wow fadeInUp" data-wow-delay="0.4s" style="background: rgb(255, 255, 255); visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                        <!-- Icon -->
+                        <div class="service_icon">
+                            <img src="../../../app-assets/assets-home/image/asset_41.png" width="150px" alt="">
+                        </div>
+                        <h6>Transaction</h6>
+                        <p>We use Binance and
+                            Bitfinex trading accounts
+                            to manage assets and
+                            earn profits for clients.</p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- ##### About Us Area Start ##### -->
+    <section class="about-us-area section-padding-0-100 clearfix" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-lg-6">
+                    <div class="welcome-meter wow fadeInUp" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+                        <img src="../../../app-assets/assets-home/image/asset_51.png" class="center-block" alt="">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="who-we-contant">
+                        <div class="dream-dots text-left wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                            <img src="../../../app-assets/assets-home/img/svg/section-icon-2.svg" alt="">
+                        </div>
+                        <h4 class="wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">About Us</h4>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Binance Capital is a financial group established in New
+                            Zealand operating in banking, venture capital,
+                            technology, retail, etc. In 2019 Binance Capital has grown
+                            to over 10 European countries.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">In 2020 we focus mainly on technology, establishing
+                            investment funds. With strong growth in new markets
+                            such as Cryptocurrency - a potential market in the
+                            future, we chose Binance Exchange to participate in the
+                            crypto exchange process and seek profit.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">We operate in the field of financial technology: Bigdata
+                            Digital Banking, Mining Coin..</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ##### About Us Area End ##### -->
+     <!-- ##### Our Services Area Start ##### -->
+     <section class="our_services_area section-padding-100-0 clearfix" style="background: url(./../../../app-assets/assets-home/img/bg-img/shape2.jpg) no-repeat center center;">
+        <div class="container">
+            
+            <div class="section-heading text-center">
+                <!-- Dream Dots -->
+                <div class="dream-dots justify-content-center wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                    <img src="../../../app-assets/assets-home/img/svg/section-icon-3.svg" alt="">
+                </div>
+                <h2 class="wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Our Trading Platform</h2>
+            </div>
+                
+
+            <div class="row">
+                <div class="col-12 col-sm-6 col-lg-4">
+                    <!-- Content -->
+                    <div class="service_single_content text-center mb-100 wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;min-height: 450px;">
+                        <!-- Icon -->
+                        <div class="service_icon">
+                            <img src="../../../app-assets/assets-home/image/asset_3.png" width="120px" alt="">
+                        </div>
+                        <h6>Safety</h6>
+                        <p>We have established
+                            Multisignature e-wallet
+                            security network in the process
+                            of making profit. In addition,
+                            we are very careful in choosing
+                            the environment when making
+                            transactions with large assets.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+                    <!-- Content -->
+                    <div class="service_single_content text-center mb-100 fadeInUp" data-wow-delay="0.3s" style="min-height: 450px;">
+                        <!-- Icon -->
+                        <div class="service_icon">
+                            <img src="../../../app-assets/assets-home/image/asset_4.png" width="200px" alt="">
+                        </div>
+                        <h6>Transparent</h6>
+                        <p>All our transactions are public,
+                            our business and investment
+                            plans are always clear. That
+                            makes Binance Capital's
+                            sustainable development.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4 wow fadeInUp" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+                    <!-- Content -->
+                    <div class="service_single_content text-center mb-100 fadeInUp" data-wow-delay="0.4s" style="min-height: 450px;">
+                        <!-- Icon -->
+                        <div class="service_icon">
+                            <img src="../../../app-assets/assets-home/image/asset_5.png" width="150px" alt="">
+                        </div>
+                        <h6>Sustainability</h6>
+                        <p>We always set out many
+                            solutions for future business
+                            direction. The market is not
+                            stable, so the trading on the
+                            market has many potential
+                            risks. So we have established a
+                            digital lending bank, which is a
+                            stable source of revenue.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Our Services Area End ##### -->
+
+     <!-- ##### Our features Area start ##### -->
+     <section class="features section-padding-100">
+        <div class="section-heading text-center">
+            <!-- Dream Dots -->
+            <div class="dream-dots justify-content-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                <img src="../../../app-assets/assets-home/img/svg/section-icon-2.svg" alt="">
+            </div>
+            <h2 class="wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">Our Eco-System</h2>
+            <p class="wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">The powerful combination of revenue from various platforms helps optimize profits
+                for investors</p>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="services-column col-lg-4 col-md-10 col-xs-10 offset-xs-1">
+ 
+                    <!--Services Block Four-->
+                    <div class="services-block-four wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                        <div class="inner-box">
+                            <div class="icon-img-box">
+                                <img src="../../../app-assets/assets-home/img/svg/feature3.svg" alt="">
+                            </div>
+                            <h3><a href="#">Exchange</a></h3>
+                            <div class="text">We are investing in high-end trading
+                                platforms on CoinmarketCap such as BTC-
+                                Alpha, Coinhub, BitMax, etc. In addition, we
+                                are planning to invest in a number of start-
+                                up companies on trading platforms that
+                                have characteristics New features.</div>
+                            
+                        </div>
+                    </div>
+
+                    <!--Services Block Four-->
+                    <div class="services-block-four wow fadeInUp" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+                        <div class="inner-box">
+                            <div class="icon-img-box">
+                                <img src="../../../app-assets/assets-home/img/svg/feature3.svg" alt="">
+                            </div>
+                            <h3><a href="#">Trading Bot</a></h3>
+                            <div class="text">Forex market is a large market
+                                capitalization in the world. Transactions
+                                take place with the participation of Bot to
+                                increase transaction frequency and
+                                optimize profits.</div>
+                        </div>
+                    </div>                   
+                </div>
+                
+                <div class="service-img-wrapper col-lg-4 col-md-12 col-sm-12 wow fadeInUp" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+                    <div class="image-box">
+                        <img src="../../../app-assets/assets-home/image/bg-panel.png" class="center-block img-responsive phone-img" width="400px" alt="">
+                    </div>
+                </div>
+                <div class="services-column col-lg-4 col-md-10 col-xs-10 offset-xs-1">
+                    
+                    <!--Services Block Four-->
+                    <div class="services-block-four wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                        <div class="inner-box">
+                            <div class="icon-img-box">
+                                <img src="../../../app-assets/assets-home/img/svg/feature3.svg" alt="">
+                            </div>
+                            <h3><a href="#">Mining Coin</a></h3>
+                            <div class="text">In 2018, when we realized that the market
+                                was adjusted, we signed a strategic
+                                cooperation contract with Genesis Mining, a
+                                Bitcoin mining company on the world's
+                                largest cloud platform.</div>
+                        </div>
+                    </div>
+                    <div class="services-block-four wow fadeInUp" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;margin-bottom:0">
+                        <div class="inner-box">
+                            <div class="icon-img-box">
+                                <img src="../../../app-assets/assets-home/img/svg/feature3.svg" alt="">
+                            </div>
+                            <h3><a href="#">Bigdata</a></h3>
+                            <div class="text">Artificial intelligence is growing and an
+                                integral part of AI's success is Bigdata, our
+                                research plan started in early 2017.</div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Our features Area End ##### -->
+
+    <section class="demo-video section-padding-100" id="system">
+    <div class="container">
+        <div class="section-heading text-center">
+                    <!-- Dream Dots -->
+                    <div class="dream-dots justify-content-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                        <img src="../../../app-assets/assets-home/image/asset_61.png" alt="">
+                    </div>
+                    <h2 class="wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">Global Binance System</h2>
+                    <p class="wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Let's watch the Video below. Binance Exchange is indeed the largest
+                        cryptocurrency exchange in the world. We are proud to be one of the partners with
+                        large trading assets on the Binance system.</p>
+                </div>
+        <!-- Welcome Video Area -->
+        <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1 col-sm-12">
+            <div class="welcome-video-area wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                <!-- Welcome Thumbnail -->
+                <div class="welcome-thumb">
+                    <img src="../../../app-assets/assets-home/img/bg-img/bg-4.jpg" alt="">
+                </div>
+                <!-- Video Icon -->
+                <div class="video-icon">
+                    <a href="https://www.youtube.com/watch?v=gbXEPHsTkgU" class="btn dream-btn video-btn" id="videobtn"><i class="fa fa-play"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+
+    <!-- ##### About Us Area Start ##### -->
+    <section class="about-us-area section-padding-100-0 clearfix">
+        <div class="container">
+            <div class="row align-items-center">
+                
+                
+                <div class="col-12 col-lg-6">
+                    <div class="who-we-contant">
+                        <div class="dream-dots text-left wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                            <img src="../../../app-assets/assets-home/image/asset_71.png" alt="">
+                        </div>
+                        <h4 class="wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">The World's Leading Cryptocurrency Exchange</h4>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">The Binance Exchange ecosystem includes many
+                            products that support all users who are participating in
+                            the market. Products included.</p>
+                        <a href="#" class="wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp; margin-right: 15px;">Exchange</a>
+                        <a href="#" class="wow fadeInUp" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp; margin-right: 15px;">Academy</a>
+                        <a href="#" class="wow fadeInUp" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp; margin-right: 15px;">BCF</a>
+                        <a href="#" class="wow fadeInUp" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp; margin-right: 15px;">Info</a>
+                        <a href="#" class="wow fadeInUp" data-wow-delay="0.9s" style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp; margin-right: 15px;">Labs</a>
+                        <a href="#" class="wow fadeInUp" data-wow-delay="1s" style="visibility: visible; animation-delay: 1s; animation-name: fadeInUp; margin-right: 15px;">Launchpad</a>
+                        <a href="#" class="wow fadeInUp" data-wow-delay="1.1s" style="visibility: visible; animation-delay: 1.1s; animation-name: fadeInUp; margin-right: 15px;">Research</a>
+                        <a href="#" class="wow fadeInUp" data-wow-delay="1.2s" style="visibility: visible; animation-delay: 1.2s; animation-name: fadeInUp; margin-right: 15px;">Truss Wallet</a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="welcome-meter wow fadeInUp" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+                        <img src="../../../app-assets/assets-home/image/trading.png" class="img-responsive center-block" alt="">
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ##### About Us Area End ##### -->
+    <div class="clearfix"></div>
+
+    <section class="spread-map" style="background-image: url(../../../app-assets/assets-home/img/bg-img/bread-bg.png);">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 col-xs-12">
+                    <div class="who-we-contant">
+	                    <h4 class="wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">TRUST WALLET</h4>
+                        <ul class="s-list list-unstyled mt30">
+
+                            <li style="margin-bottom:0">
+                            <p style="margin-bottom:0">Trust Wallet is now the official cryptocurrency
+                                wallet of Binance.</p></li>
+                            <li style="margin-bottom:0">
+                            <p style="margin-bottom:0">Secure Crypto Wallet with many features:</p></li>
+                            <li style="margin-bottom:0"><span class="fa fa-check s-list-icon"></span>
+                            <p class="s-list-desc" style="margin-bottom:0">Secure</p></li>
+                            <li style="margin-bottom:0"><span class="fa fa-check s-list-icon"></span>
+                            <p class="s-list-desc" style="margin-bottom:0">Multi-currency</p></li>
+                            <li style="margin-bottom:0"><span class="fa fa-check s-list-icon"></span>
+                            <p class="s-list-desc" style="margin-bottom:0">Decentralized Exchange</p></li>
+                            <li style="margin-bottom:0"><span class="fa fa-check s-list-icon"></span>
+                            <p class="s-list-desc" style="margin-bottom:0">Anonymous</p></li>
+                            <li style="margin-bottom:0"><span class="fa fa-check s-list-icon"></span>
+                            <p class="s-list-desc" style="margin-bottom:0">ERC20 & BEP2 Compatible</p></li>
+                            <li style="margin-bottom:0"><span class="fa fa-check s-list-icon"></span>
+                            <p class="s-list-desc" style="margin-bottom:0">DApps and Web3</p></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-7 col-xs-12">
+                    <div class="map-container">
+                        <img src="../../../app-assets/assets-home/image/wallet.png" alt="map" style="width: 100%">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ##### invest Area Start ##### -->
+    <section class="about-us-area section-padding-100-0 clearfix" id="invest">
+        <div class="container">
+            <div class="row align-items-center">
+                
+                
+                <div class="col-12 col-lg-6">
+                    <div class="who-we-contant">
+                        <h4 class="wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">Invest</h4>
+                        <p class="wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">A minimum of $ 50 is our base investment. The
+                            small investment package helps us to expand our
+                            global user faster, manage our assets securely.
+                            Start your portfolio by creating an account on
+                            Binance Capital.</p>
+                        <p class="wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">Dailly Profits %0.5 – %0.7</p>
+                        <a class="btn btn-outline-info  fadeInUp" href="/register" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">Register</a>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="welcome-meter wow fadeInUp" data-wow-delay="0.7s" style="visibility: visible; animation-delay: 0.7s; animation-name: fadeInUp;">
+                        <img src="../../../app-assets/assets-home/image/asset_81.png" class="img-responsive center-block" alt="">
+                        
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- ##### invest Area End ##### -->
+
+
+    <!-- ##### partner Area start ##### -->
+    <section class="token-distribution section-padding-100" style="background: url(../../../app-assets/assets-home/img/bg-img/shape2.jpg) no-repeat center center;" id="partner">
+    	<div class="section-heading text-center">
+            <h2 class="wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">Partner</h2>
+        </div>
+        <div class="container">
+           
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="token-info">
+                    <div class="info-wrapper">
+                        <div class="token-descr">With user-friendly products, we are always
+                            looking to expand our sales offices globally.
+                            Binance Capital's development team is an
+                            important factor in the process of building a
+                            leading investment company in the world. If
+                            you are the right candidate, contact us and
+                            download our development policy below</div>
+                    </div>
+                </div>
+                <div class="token-info" style="margin-bottom:0">
+                        <a  class="btn btn-outline-info" href="">Download</a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <div class="token-allocation">
+                    <img src="../../../app-assets/assets-home/image/asset_105.png" class="center-block" alt="">
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <!-- ##### partner Area End ##### -->
+
+    <!-- ##### Our roadmap Area start ##### -->
+    <section class="roadmap section-padding-100" style="background: url(../../../app-assets/assets-home/img/bg-img/bread-bg.png) no-repeat center top;background-size: cover;" id="roadmap">
+        <div class="section-heading text-center">
+            <h2 class="wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp; margin-bottom: 30px;">Our Roadmap</h2>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="section_5-content">
+                    <div class="section_5-slider-trumb"></div>
+                    <div id="section_5-slider-circle">
+                        <div style="left:20%" class="data_cir cir_1" data-date="2017">
+                            <div class="data_cir-content">
+                                <div>
+                                    <div class="roadmap_content_info">
+                                        <ul>                                          
+                                            <li><span>Research on Trading Bot And AI</span></li>
+                                            <span class="not-date"><h5>2017</h5></span>
+                                        </ul>
+                                    </div>
+                                    <span class="roadmap_img"><img src="../../../app-assets/assets-home/img/roadmap-icons/2.svg" alt=""></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="left:35%" class="data_cir cir_2" data-date="2018">
+                            <div class="data_cir-content">
+                                <div>
+                                    <div class="roadmap_content_info">
+                                        <ul>
+                                            <span class="not-date"><h5>2018</h5></span>
+                                            <li><span>Become a Partner of Genesis Mining</span></li>
+                                        </ul>
+                                    </div>
+                                    <span class="roadmap_img"><img src="../../../app-assets/assets-home/img/roadmap-icons/3.svg" alt=""></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="left:50%" class="data_cir cir_3" data-date="2019">
+                            <div class="data_cir-content">
+                                <div><div class="roadmap_content_info">
+                                    <ul>
+                                        <li><span>Binance Capital was established and Expended in many Countries</span></li>
+                                        <span class="not-date"><h5>2019</h5></span>
+                                    </ul>
+                                    </div>
+                                    <span class="roadmap_img"><img src="../../../app-assets/assets-home/img/roadmap-icons/4.svg" alt=""></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="left:65%" class="data_cir cir_4 red_crc" data-date="2020">
+                            <div class="data_cir-content">
+                                <div>
+                                    <div class="roadmap_content_info">
+                                        <ul>
+                                            <span class="not-date"><h5>2020</h5></span>
+                                            <li><span>Binance Capital Expended Into Asia Markets</span></li>
+                                        </ul>
+                                    </div>
+                                    <span class="roadmap_img"><img src="../../../app-assets/assets-home/img/roadmap-icons/5.svg" alt=""></span>\
+                                </div>
+                            </div>
+                        </div>
+                        <div style="left:80%" class="data_cir cir_5 next" data-date="2021~">
+                            <div class="data_cir-content">
+                                <div><div class="roadmap_content_info">
+                                    <ul>
+                                        <li><span>Building a Digital Payment Platform based on Binance's Blockchain</span></li>
+                                        <span class="not-date"><h5>2021</h5></span>
+                                    </ul>
+                                </div>
+                                <span class="roadmap_img"><img src="../../../app-assets/assets-home/img/roadmap-icons/6.svg" alt=""></span>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ##### Our roadmap Area End ##### -->
+
+    <div class="modal fade" id="policy" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title text-center" id="exampleModalLabel" style="color: white;">Policy for developers</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 text-left text-white mb-5">This is extremely attractive development policy for our Asian team </div>
+                </div>
+              <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                      <h5 style="color: rgb(0, 221, 236)">Direct commission</h5>
+                      <table>
+                          <tbody>
+                              <tr>
+                                  <td>Level</td>    
+                                  <td>Profit</td>
+                              </tr>
+                              <tr>
+                                  <td>F1</td>    
+                                  <td>15%</td>
+                              </tr>
+                              <tr>
+                                  <td>F2</td>
+                                  <td>6%</td>
+                              </tr>
+                              <tr>
+                                  <td>F3</td>
+                                  <td>3%</td>
+                              </tr>
+                              <tr>
+                                  <td>F4</td>
+                                  <td>1%</td>
+                              </tr>
+                              <tr>
+                                  <td>F5</td>
+                                  <td>0.8%</td>
+                              </tr>
+                              <tr>
+                                  <td>F6</td>
+                                  <td>0.6%</td>
+                              </tr>
+                              <tr>
+                                  <td>F7</td>
+                                  <td>0.5%</td>
+                              </tr>
+                              <tr>
+                                  <td>F8</td>
+                                  <td>0.3%</td>
+                              </tr>
+                              <tr>
+                                  <td>F9</td>
+                                  <td>0.2%</td>
+                              </tr>
+                              <tr>
+                                  <td>F10</td>
+                                  <td>0.1%</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                      <h5 style="color: rgb(0, 221, 236);">Indirect commission</h5>
+                      <table>
+                        <tbody>
+                            <tr>
+                                <td>Level</td>    
+                                <td>Profit</td>
+                            </tr>
+                            <tr>
+                                <td>F1</td>    
+                                <td>30%</td>
+                            </tr>
+                            <tr>
+                                <td>F2</td>
+                                <td>20%</td>
+                            </tr>
+                            <tr>
+                                <td>F3</td>
+                                <td>10%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-12">
+                      <p class="col-12 text-left text-white mt-4"><i>Note: All rewards in the process of expanding the user are paid immediately afterwards from Binance
+                        Capital Corporation</i></p>
+                  </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-info" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- ##### Footer Area Start ##### -->
+    <footer class="footer-area bg-img" style="background-image: url(../../../app-assets/assets-home/img/core-img/pattern.png);">
+
+        <!-- ##### Contact Area Start ##### -->
+        <div class="contact_us_area section-padding-100-0" id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="section-heading text-center">
+                            <h2 class="wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">Contact With Us</h2>
+                            <p class="wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Our team works 24/7 to answer any customer questions. Please
+                                contact for the fastest answer.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-10 col-lg-8">
+                        <div class="contact_form">
+                            <form action="#" method="post" id="main_contact_form" novalidate="">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div id="success_fail_info"></div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="group wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                            <input type="text" name="name" id="name" required="">
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                            <label>Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="group wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                                            <input type="text" name="email" id="email" required="">
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                            <label>Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="group wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                                            <input type="text" name="subject" id="subject" required="">
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                            <label>Subject</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="group wow fadeInUp" data-wow-delay="0.5s" style="visibility: visible; animation-delay: 0.5s; animation-name: fadeInUp;">
+                                            <textarea name="message" id="message" required=""></textarea>
+                                            <span class="highlight"></span>
+                                            <span class="bar"></span>
+                                            <label>Message</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
+                                        <button type="submit" class="btn dream-btn">Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ##### Contact Area End ##### -->
+
+        <div class="footer-content-area ">
+            <div class="container">
+                <div class="row align-items-end">   
+                    <div class="col-12 col-md-5">
+                        <div class="footer-copywrite-info">
+                            <!-- Copywrite -->
+                            <div class="copywrite_text wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                <div class="footer-logo">
+                                    <a href="#"><img src="../../../app-assets/assets-home/image/asset_39.png" class="logo-top" alt="logo"></a>
+                                </div>
+                                <p>Binance Capital is the first digital
+                                    money lending platform in the
+                                    world on Binance Exchange. We
+                                    generate stable profits from the
+                                    growth of Cryptocurrency.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-7">
+                        <!-- Content Info -->
+                        <div class="contact_info_area d-sm-flex justify-content-between">
+                            <div class="contact_info text-center wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                                <h5>SYSTEM</h5>
+                                <a href="/"><p>Home</p></a>
+                                <a href="/"><p>About Us</p></a>
+                                <a href="/"><p>Binance System</p></a>
+                                <a href="/"><p>Invest</p></a>
+                            </div>
+                            <!-- Content Info -->
+                            <div class="contact_info text-center wow fadeInUp" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInUp;">
+                                <h5>InFORMATION</h5>
+                                <a href="/"><p>Partner</p></a>
+                                <a href="#" data-toggle="modal" data-target="#policy"><p>Policy</p></a>
+                                <a href="/"><p>Roadmap</p></a>
+                                <a href="/"><p>Contact</p></a>
+                            </div>
+                            <!-- Content Info -->
+                            <div class="contact_info text-center wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                                <h5>CONTACT US</h5>                                                           <!-- Social Icon -->
+                                <div class="footer-social-info wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
+                                    <a href="https://www.facebook.com/binance"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                    <a href="https://twitter.com/binance"> <i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    <a href="https://www.binance.com/en/community"> <i class="fa fa-telegram" aria-hidden="true"></i></a>
+                                    <a href="https://www.reddit.com/r/binanceexchange"><i class="fa fa-reddit" aria-hidden="true"></i></a>
+                                    <a href="https://www.instagram.com/Binance/"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                                    <a href="https://www.youtube.com/binanceyoutube"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                                </div>
+                                <a href="https://coinmarketcap.com/exchanges/binance/">COINMARKETCAP</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- ##### Footer Area End ##### -->
+
+    <!-- ########## All JS ########## -->
+    <!-- jQuery js -->
+    <script src="../../../app-assets/assets-home/js/jquery.min.js"></script>
+    <!-- Popper js -->
+    <script src="../../../app-assets/assets-home/js/popper.min.js"></script>
+    <!-- Bootstrap js -->
+    <script src="../../../app-assets/assets-home/js/bootstrap.min.js"></script>
+    <!-- All Plugins js -->
+    <script src="../../../app-assets/assets-home/js/plugins.js"></script>
+    <!-- Parallax js -->
+    <script src="../../../app-assets/assets-home/js/dzsparallaxer.js"></script>
+
+    <script src="../../../app-assets/assets-home/js/jquery.syotimer.min.js"></script>
+
+    <!-- script js -->
+    <script src="../../../app-assets/assets-home/js/script.js"></script>
+    <a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;">Scroll Top</a>
+
+
+
+</body></html>

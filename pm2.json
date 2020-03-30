@@ -1,0 +1,9 @@
+{
+    "apps": [
+        {
+            "name": "bnbcap",
+            "script": "npm",
+            "args" : "start"
+        }
+    ]
+}

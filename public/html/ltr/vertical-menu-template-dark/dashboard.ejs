@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <title><%= title %></title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/charts/apexcharts.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.css">
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/colors/palette-gradient.css">
+    <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/card-analytics.css">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern dark-layout 2-columns  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns" data-layout="dark-layout">
+    <%- include("header") -%>
+    <%- include("menu") -%>
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper">
+            <div class="content-body">
+                <!-- Statistics card section start -->
+
+                <section id="input-group-buttons">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Copy your referral link and share</h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-12 mb-1">
+                                                <fieldset>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="text-link" value="<%= dashboard.link %>" aria-describedby="button-addon2">
+                                                        <div class="input-group-append" id="button-addon2">
+                                                            <button class="btn btn-primary" type="button" id="copy-link">Copy</button>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+
+                                            <div class="col-md-6 col-12 mb-1">
+                                                <fieldset>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" id="text-id" value="<%= dashboard.id %>" aria-describedby="button-addon2">
+                                                        <div class="input-group-append" id="button-addon2">
+                                                            <button class="btn btn-primary" type="button" id="copy-id">Copy</button>
+                                                        </div>
+                                                    </div>
+                                                </fieldset>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="statistics-card">
+
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0"><%=  dashboard.wallet_btc.toFixed(2) %></h2>
+                                        <p>Wallet BTC</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-dollar-sign text-primary font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0"><%=  dashboard.static_btc.toFixed(2) %></h2>
+                                        <p>Static BTC</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-success p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-star-on text-success font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0"><%=  dashboard.wallet_bnb.toFixed(2) %></h2>
+                                        <p>Wallet BNB</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-danger p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-dollar-sign text-danger font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0"><%=  dashboard.static_bnb.toFixed(2) %></h2>
+                                        <p>Static BNB</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-warning p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-star text-warning font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0"><%=  dashboard.sales_btc.toFixed(2) %></h2>
+                                        <p>Sales BTC</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-primary p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-activity text-primary font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0"><%=  dashboard.system_btc.toFixed(2) %></h2>
+                                        <p>System BTC</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-success p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-server text-success font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0"><%=  dashboard.sales_bnb.toFixed(2) %></h2>
+                                        <p>Sales BNB</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-danger p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-activity text-danger font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700 mb-0"><%=  dashboard.system_bnb.toFixed(2) %></h2>
+                                        <p>System BNB</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-warning p-50 m-0">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-server text-warning font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700"><%=  dashboard.member %></h2>
+                                        <p class="mb-0">Member</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-primary p-50">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-user text-primary font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div id="line-area-chart-5"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700"><%=  dashboard.interest %></h2>
+                                        <p class="mb-0">Interest</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-success p-50">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-briefcase text-success font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div id="line-area-chart-6"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-sm-6 col-12">
+                            <div class="card">
+                                <div class="card-header d-flex align-items-start pb-0">
+                                    <div>
+                                        <h2 class="text-bold-700"><%=  dashboard.days %></h2>
+                                        <p class="mb-0">Days</p>
+                                    </div>
+                                    <div class="avatar bg-rgba-warning p-50">
+                                        <div class="avatar-content">
+                                            <i class="feather icon-calendar text-warning font-medium-5"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                    <div id="line-area-chart-7"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- // Statistics Card section end-->
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <script src="../../../app-assets/js/scripts/components.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="../../../app-assets/js/scripts/cards/card-statistics.js"></script>
+    <script src="../../../app-assets/js/scripts/extensions/copy-to-clipboard.js"></script>
+    <!-- END: Page JS-->
+
+</body>
+<!-- END: Body-->
+
+</html>
