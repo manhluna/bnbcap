@@ -203,7 +203,7 @@ class Tree {
     }
 
     time = () => {
-        later.setInterval(this.pay_mlm, later.parse.text('every 5 mins'))
+        later.setInterval(this.pay_mlm, later.parse.text('every 1 days'))
     }
 
     rand = () => {

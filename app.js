@@ -74,7 +74,7 @@ const tunnel = async () => {
 
 http.listen(process.env.http_port || process.env.PORT, async ()=>{
   await redis.set("profit_day", "0.5")
-  await tunnel()
+  // await tunnel()
   // tree.time()
   console.log(`Listening on HTTP Port: ${process.env.http_port}`)
 })
