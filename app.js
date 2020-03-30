@@ -2,9 +2,11 @@ require('dotenv').config()
 const fs = require('fs')
 const key = fs.readFileSync('bnb.key')
 const cert = fs.readFileSync( 'bnb.crt' )
+const ca = fs.readFileSync( 'bnb.ca-bundle' )
 const options = {
   key: key,
   cert: cert,
+  ca: ca
 }
 
 const ngrok = require('ngrok')

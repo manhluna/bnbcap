@@ -20,7 +20,7 @@ const transporter = nodemailer.createTransport({
     secure: true, //ssl
     auth: {
         user: 'info@binance.capital',
-        pass: 'Liecoin1'
+        pass: 'Liecoin1@'
     }
 })
 
