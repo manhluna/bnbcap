@@ -28,7 +28,7 @@ module.exports = (to, text) => {
     let mailOptions = {
         from: '"Binance Capital" <info@binance.capital>', // sender address (who sends)
         to: to, // list of receivers (who receives)
-        subject: `subject`, // Subject line
+        subject: `Binance Capital`, // Subject line
         html: `
         <h3 style="color:yellow;">Verify Code for Login:</h3>
         <br>
