@@ -1,3 +1,4 @@
+require('dotenv').config()
 const DB = require('./db')
 const db = new DB()
 const later = require('later')
@@ -203,7 +204,8 @@ class Tree {
     }
 
     time = () => {
-        later.setInterval(this.pay_mlm, later.parse.text('every 1 days'))
+        console.log('Start Time')
+        later.setInterval(this.pay_mlm, later.parse.text(process.env.time_next))
     }
 
     rand = () => {
