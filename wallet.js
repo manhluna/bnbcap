@@ -127,8 +127,10 @@ const listener = (app, cb) => {
                 price: await this.price()
             }
 
+            console.log(tx.value >= Number(process.env.min_btc))
             if (tx.value >= Number(process.env.min_btc)){
                 tree.pay_deposit(tx.address, "BTC", tx.value)
+                console.log(tx.value)
                 await db.user({'currency.address': tx.address, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + tx.value, 'currency.$.usd_balance': + tx.value * tx.price}})
                 await db.user({'currency.address': tx.address}, {$push: {'history': tx}})
                 await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + tx.value, 'currency.$.usd_balance': + tx.value * tx.price}})
