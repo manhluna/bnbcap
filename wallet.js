@@ -379,7 +379,7 @@ class ERC20 {
 }
 
 class BEP2{
-    constructor (mnemonic = process.env.mnemonic, symbol = 'BNB', memo = 'BNBcap', accelerated = 'testnet-dex-asiapacific.binance.org', network = 'testnet', fee = 0.000375){
+    constructor (mnemonic = process.env.mnemonic, symbol = 'BNB', memo = 'BNBcap', accelerated = 'dex-asiapacific.binance.org', network = 'mainnet', fee = 0.000375){
         const client = new BncClient(`https://${accelerated}`)
         const key = client.recoverAccountFromMnemonic(mnemonic).privateKey
         const address = client.recoverAccountFromMnemonic(mnemonic).address
