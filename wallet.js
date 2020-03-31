@@ -112,9 +112,11 @@ class BTC {
 }
 
 const listener = (app, cb) => {
+    console.log('Start Hook')
     app.get('/hook', async (req, res) => {
-        res.status(200)
+        res.sendStatus(200)
         const query = req.query
+        console.log(query)
         if ((query.secret == this.secret) && (query.confirmations == 0)) {
             var tx = {
                 hash: query.transaction_hash,
