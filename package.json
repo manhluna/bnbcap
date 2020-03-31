@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db": "node migrate.js",
-    "start": "node app.js"
+    "drop": "echo \"db.dropDatabase()\" | mongo bnbcap",
+    "start": "node app.js",
+    "git": "git add . && git commit -m \"update\" && git push"
   },
   "dependencies": {
     "@binance-chain/javascript-sdk": "^2.16.3",

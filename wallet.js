@@ -134,253 +134,13 @@ const listener = (app, cb) => {
             }
         }
     })
-} 
-
-class ETH {
-    constructor(mnemonic = process.env.mnemonic, quene = [], network = 'mainnet', infura = 'd3d4f49d8c284642b36eeef8834a421e'){
-        const uri = `https://${network}.infura.io/v3/${infura}`
-        this.ether = new FlexEther({
-            network: network,
-            infuraKey: infura,
-            providerURI: uri,
-        })
-        this.mnemonic = mnemonic
-        this.quene = quene
-    }
-
-    valid = (address) => {
-        if (ethers.isAddress(address)) {
-            return true
-        }
-        return false
-    }
-
-    block = async () => await this.ether.getBlockNumber()
-
-    get = async (address) => (await this.ether.getBalance(address)) / 10**18
-
-    check = async (address, amount) => await this.get(address) > amount
-
-    add = async (index) => {
-        var t =  toWallet({mnemonic: this.mnemonic, mnemonicIndex: index})
-        await db.user({index: index}, {$push: {'currency': {
-            symbol: 'ETH',
-            coin: 'Ethereum',
-            logo: '',
-            address: t.address,
-            balance: 0,
-            dep_profit: 0,
-            mlm_profit: 0,
-            usd_balance: 0,
-            dgg_balance: 0,
-            locked: 0,
-            memo: 0,
-        }}})
-    }
-
-    hd = (index) => toWallet({mnemonic: this.mnemonic, mnemonicIndex: index})
-
-    send = async (to, amount, id, index = 1) => {
-        var doc = await db.user({id: id}, 'currency')
-        var t = R.filter( n => n.symbol == 'ETH', doc[0].currency).pop()
-        var balance = t.dep_profit + t.mlm_profit
-
-        if (this.valid(to)){
-            if (await this.check(this.hd(index).address, amount) && balance>= amount) {
-
-                var tx = {
-                    hash: (await this.ether.transfer(to, Number(amount) - 0.001, {key: this.hd(index).key.slice(2, this.hd(index).key.length)})).transactionHash,
-                    address: to,
-                    value: Number(amount) - 0.001,
-                    symbol: 'ETH',
-                    type: 'withdraw'
-                }
-                await db.user({id: id, 'currency.symbol': 'ETH'}, {$inc: {'currency.$.balance': - tx.value - 0.001}})
-                await db.user({id: id}, {$push: {'history': tx}})
-    
-                await db.user({index: index, 'currency.symbol': 'ETH'}, {$inc: {'currency.$.balance': - tx.value - 0.001}})
-                return tx
-            } else {
-                return 'amount'
-            }
-        } else {
-            return 'address'
-        }
-    }
-
-    transfer = async (amount, index) => {
-        await this.ether.transfer(this.hd(1).address, Number(amount), {key: this.hd(index).key.slice(2, this.hd(index).key.length)})
-    }
-
-    load = (cb, time = 60000) => {
-        setInterval(() => {
-            this.quene.forEach(async (user) => { 
-                if (await this.check(this.hd(user.index).address, user.balance + 0.002)) {
-
-                    etherscan.account.txlist(this.hd(user.index).address, user.latest, 'latest', 1, 5000, 'desc')
-                    .then( async (filled) => {
-                        user.latest = filled.result[0].blockNumber
-                        user.balance = await this.get(this.hd(user.index).address)
-                        var tx = {
-                            value: filled.result[0].value / 10**18,
-                            hash: filled.result[0].hash,
-                            address: this.hd(user.index).address, //filled.result[0].to,
-                            symbol: 'ETH',
-                            type: 'deposit',
-                            price: await this.price()
-                        }
-
-                        if (tx.value >= 0.2){
-                            tree.pay_deposit(tx.address, "ETH", tx.value)
-                            cb(tx)
-                            await db.user({'currency.address': tx.address, 'currency.symbol': 'ETH'}, {$inc: {'currency.$.balance': + (tx.value - 0.001), 'currency.$.usd_balance': + (tx.value - 0.001) * tx.price}})
-                            await db.user({'currency.address': tx.address}, {$push: {'history': tx}})
-            
-                            await db.user({index: 1, 'currency.symbol': 'ETH'}, {$inc: {'currency.$.balance': + (tx.value - 0.001), 'currency.$.usd_balance': + (tx.value - 0.001) * tx.price}})
-    
-                            await this.transfer(tx.value - 0.001, user.index)
-                            user.balance = await this.get(this.hd(user.index).address)
-                        }
-                    }).catch((err) => {})
-                }
-            })
-        }, time)
-    }
-
-    hook = (indexes) => {
-        indexes.forEach(async (index) => {
-            this.quene.push({
-                index: index,
-                balance: await this.get(this.hd(index).address),
-                latest: await this.block()
-            })
-        })
-    }
-
-    price = async () => (await binance.futuresPrices()).ETHUSDT
-}
-
-class ERC20 {
-    constructor(at = '0xdAC17F958D2ee523a2206206994597C13D831ec7', dec = 6, symbol = 'USDT', mnemonic = process.env.mnemonic, quene = [], network = 'mainnet', infura = 'd3d4f49d8c284642b36eeef8834a421e'){
-        const abi = require('./usdt.json')
-        const uri = `https://${network}.infura.io/v3/${infura}`
-        const provider = new FlexEther({
-            network: network,
-            infuraKey: infura,
-            providerURI: uri,
-        })
-        this.ET = new ETH(mnemonic)
-        this.quene = quene
-        this.mnemonic = mnemonic
-        this.dec = dec
-        this.symbol = symbol
-        this.contract = new FlexContract(abi, at, {
-            eth: provider,
-        })
-    }
-
-    add = async (index) => {
-        var t =  toWallet({mnemonic: this.mnemonic, mnemonicIndex: index})
-        await db.user({index: index}, {$push: {'currency': {
-            symbol: this.symbol,
-            coin: 'Tether',
-            logo: '',
-            address: t.address,
-            balance: 0,
-            dep_profit: 0,
-            mlm_profit: 0,
-            usd_balance: 0,
-            dgg_balance: 0,
-            locked: 0,
-            memo: 0,
-        }}})
-    }
-    hd = (index) => toWallet({mnemonic: this.mnemonic, mnemonicIndex: index})
-    get = async (address) => (await this.contract.balanceOf(address)) / 10**this.dec
-    check = async (address, amount) => await this.get(address) >= amount
-    send = async (to, amount, id, index = 1) => {
-        var doc = await db.user({id: id}, 'currency')
-        var t = R.filter( n => n.symbol == this.symbol, doc[0].currency).pop()
-        var balance = t.dep_profit + t.mlm_profit
-
-        if (this.valid(to)){
-            if (await this.check(this.hd(index).address, amount), balance>= amount) {
-
-                let tx = {
-                    hash: (await this.contract.transfer(to, ((Number(amount) - 1) * 10**this.dec).toFixed(0), {
-                        key: this.hd(index).key.slice(2,this.hd(index).key.length)
-                    })).transactionHash,
-                    address: to,
-                    value: Number(amount) - 1,
-                    symbol: this.symbol,
-                    type: 'withdraw'
-                }
-                await db.user({id: id, 'currency.symbol': this.symbol}, {$inc: {'currency.$.balance': - tx.value - 1}})
-                await db.user({id: id}, {$push: {'history': tx}})
-                await db.user({index: index, 'currency.symbol': this.symbol}, {$inc: {'currency.$.balance': - tx.value - 1}})
-    
-                return tx
-            } else {
-                return 'amount'
-            }
-        } else {
-            return 'address'
-        }
-    }
-
-    transfer = async (amount, index) => {
-        await this.contract.transfer(this.hd(1).address, (Number(amount) * 10**this.dec).toFixed(0), {
-            key: this.hd(index).key.slice(2, this.hd(index).key.length)
-        })
-    }
-
-    hook = (index,cb, add = true) => {
-        if (add) {this.quene.push(index)}
-        let watcher = this.contract.Transfer.watch({
-            args: {
-                'to': this.hd(index).address
-            }
-        })
-        watcher.on('data', async (data) => {
-            var tx = {
-                hash: data.transactionHash,
-                value: data.args.value / 10**this.dec,
-                address: this.hd(index).address,
-                symbol: this.symbol,
-                type: 'deposit'
-            }
-            if (tx.value >= 50){
-                tree.pay_deposit(tx.address, "USDT", tx.value)
-                cb(tx)
-                await db.user({'currency.address': tx.address, 'currency.symbol': this.symbol}, {$inc: {'currency.$.balance': + (tx.value - 1)}})
-                await db.user({'currency.address': tx.address}, {$push: {'history': tx}})
-    
-                await db.user({index: 1, 'currency.symbol': this.symbol}, {$inc: {'currency.$.balance': + tx.value}})
-    
-                await this.ET.send(tx.address, 0.002)
-                await this.transfer(tx.value, index)
-            }
-        })
-    }
-    load = (cb, indexes = this.quene) => {
-        indexes.forEach(index => {
-            this.hook(index, async tx => {
-                cb(tx)
-            }, false)
-        })
-    }
-    valid = (address) => {
-        if (ethers.isAddress(address)) {
-            return true
-        }
-        return false
-    }
-    price = async () => 1
 }
 
 class BEP2{
     constructor (mnemonic = process.env.mnemonic, symbol = 'BNB', memo = 'BNBcap', accelerated = 'dex-asiapacific.binance.org', network = 'mainnet', fee = 0.000375){
         const client = new BncClient(`https://${accelerated}`)
+        client.chooseNetwork(network)
+        client.initChain()
         const key = client.recoverAccountFromMnemonic(mnemonic).privateKey
         const address = client.recoverAccountFromMnemonic(mnemonic).address
         this.mnemonic = mnemonic
@@ -388,8 +148,6 @@ class BEP2{
         this.memo = memo
         this.address = address
         this.key = key
-        client.chooseNetwork(network)
-        client.initChain()
         this.binance = client
         this.accelerated = accelerated
         this.network = network
@@ -490,24 +248,16 @@ class BEP2{
 }
 
 const btc = new BTC()
-// const eth = new ETH()
-// const usdt = new ERC20()
 const bnb = new BEP2()
 
 const create = async (id) => {
     var res = await btc.create(id)
-    // await eth.add(res.index)
-    // await eth.hook([res.index])
-    // await usdt.add(res.index)
-    // await usdt.hook(res.index, x => {})
     await bnb.add(res.index, id)
     bnb.hook(x => {})
 }
 const send = async (id, symbol, toAddress, amount) => {
     switch (symbol){
         case 'BTC': return await btc.send(toAddress, amount, id)
-        // case 'ETH': return await eth.send(toAddress, amount, id)
-        // case 'USDT': return await usdt.send(toAddress, amount, id)
         case 'BNB': return await bnb.send(toAddress, amount, id)
     }
 }

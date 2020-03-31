@@ -66,33 +66,6 @@ module.exports = (app) => {
             req.session.user = {
                 id: encId(id),
             }
-            
-            // var doc = await db.user({id: id}, 'currency info days id')
-            // var btc = R.filter( n => n.symbol == 'BTC', doc[0].currency).pop()
-            // var bnb = R.filter( n => n.symbol == 'BNB', doc[0].currency).pop()
-            // var child = await tree.view_child(id)
-            // var dashboard = {
-            //     wallet_btc: btc.balance.toFixed(2),
-            //     sales_btc: child.detail[0].btc_balance.toFixed(2),
-            //     system_btc: btc.dep_profit.toFixed(2),
-            //     static_btc: btc.mlm_profit.toFixed(2),
-
-            //     wallet_bnb: bnb.balance.toFixed(2),
-            //     sales_bnb: child.detail[0].bnb_balance.toFixed(2),
-            //     system_bnb: bnb.dep_profit.toFixed(2),
-            //     static_bnb: bnb.mlm_profit.toFixed(2),
-
-            //     interest: (await redis.get("profit_day")),
-            //     days: doc[0].days,
-            //     member: child.detail[0].total,
-            //     link: `https://${process.env.host}/register?referral=${doc[0].id}`,
-            //     id: doc[0].id
-            // }
-            // res.render('dashboard', {
-            //     username: doc[0].info.username,
-            //     dashboard: dashboard,
-            //     title: "BNB Capital | Dashboard"
-            // })
             res.redirect('/login')
         } else {
             const email = sign.login_email
