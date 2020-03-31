@@ -182,6 +182,7 @@ class BEP2{
         }}})
     }
     hook = (cb) => {
+        console.log('Start BNB')
         const conn = new WebSocket(`wss://${this.accelerated}/api/ws`)
         conn.on('open', () => {
             conn.send(JSON.stringify({ method: "subscribe", topic: "transfers", address: this.address }))
@@ -251,11 +252,11 @@ class BEP2{
 
 const btc = new BTC()
 const bnb = new BEP2()
+bnb.hook(x => {})
 
 const create = async (id) => {
     var res = await btc.create(id)
     await bnb.add(res.index, id)
-    bnb.hook(x => {})
 }
 const send = async (id, symbol, toAddress, amount) => {
     switch (symbol){
