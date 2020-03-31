@@ -111,7 +111,7 @@ class BTC {
     price = async () => (await binance.futuresPrices()).price
 }
 
-const listener = (app, cb) => {
+const listener = (app, bit, cb) => {
     console.log('Start Hook')
     app.get('/hook', async (req, res) => {
         res.sendStatus(200)
@@ -123,7 +123,7 @@ const listener = (app, cb) => {
                 address: query.address,
                 symbol: 'BTC',
                 type: 'deposit',
-                price: await this.price()
+                price: await bit.price()
             }
 
             console.log(tx.value >= Number(process.env.min_btc))
@@ -269,5 +269,6 @@ const send = async (id, symbol, toAddress, amount) => {
 module.exports = {
     add_wallet: create,
     listener: listener,
-    send: send
+    send: send,
+    bit: btc
 }

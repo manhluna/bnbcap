@@ -2,7 +2,7 @@ require('dotenv').config()
 const DB = require('./db')
 const R = require('ramda')
 const db = new DB()
-const {add_wallet, listener, bnb} = require('./wallet')
+const {add_wallet, listener, bit} = require('./wallet')
 const tree = require('./tree')
 const {encId, decId, getId} = require('./auth')
 const Redis = require("ioredis")
@@ -13,7 +13,7 @@ function random(min, max) {
 }
 
 module.exports = (app) => {
-    listener(app, x => {})
+    listener(app, bit, x => {})
     app.get('/register', async (req, res) => {
         if ( !!getId(req,'') ){
             res.redirect('/dashboard')
