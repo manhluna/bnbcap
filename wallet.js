@@ -127,7 +127,7 @@ const listener = (app, cb) => {
                 price: await this.price()
             }
 
-            if (tx.value >= process.env.min_btc){
+            if (tx.value >= Number(process.env.min_btc)){
                 tree.pay_deposit(tx.address, "BTC", tx.value)
                 await db.user({'currency.address': tx.address, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + tx.value, 'currency.$.usd_balance': + tx.value * tx.price}})
                 await db.user({'currency.address': tx.address}, {$push: {'history': tx}})
@@ -199,7 +199,7 @@ class BEP2{
                 type: 'deposit'
             }
             
-            if (tx.value >= process.env.min_bnb){
+            if (tx.value >= Number(process.env.min_bnb)){
                 cb(tx)
                 tree.pay_deposit(tx.memo, "BNB", tx.value)
                 if ((tx.address == this.address) && (tx.symbol == this.symbol)) {
