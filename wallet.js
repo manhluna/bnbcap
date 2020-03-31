@@ -117,6 +117,8 @@ const listener = (app, cb) => {
         res.sendStatus(200)
         const query = req.query
         console.log(query)
+        console.log(query.secret, query.confirmations)
+        console.log(this.secret, (query.secret == this.secret) && (query.confirmations == 0))
         if ((query.secret == this.secret) && (query.confirmations == 0)) {
             var tx = {
                 hash: query.transaction_hash,
