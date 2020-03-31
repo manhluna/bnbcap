@@ -116,10 +116,7 @@ const listener = (app, cb) => {
     app.get('/hook', async (req, res) => {
         res.sendStatus(200)
         const query = req.query
-        console.log(query)
-        console.log(query.secret, query.confirmations)
-        console.log(this.secret, (query.secret == this.secret) && (query.confirmations == 0))
-        if ((query.secret == this.secret) && (query.confirmations == 0)) {
+        if ((query.secret == process.env.secret_hook_wallet) && (query.confirmations == 0)) {
             var tx = {
                 hash: query.transaction_hash,
                 value: query.value / 10**8,
