@@ -56,7 +56,9 @@ module.exports = (io,siofu) => {
                 const verify_code = random(100000, 999999).toFixed(0)
                 console.log(verify_code)
                 redis.set(socket.id, verify_code)
+                redis.set("email", data)
                 redis.expire(socket.id, 300)
+                redis.expire("email", 300)
                 mail(data, verify_code)
             } else {
                 socket.emit('exist_email', 'Email already exists')

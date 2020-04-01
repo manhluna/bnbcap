@@ -49,24 +49,29 @@ module.exports = (app) => {
     app.post('/dashboard', async (req, res) => {
         const sign = req.body
         if (sign.code !== undefined){
-            sign.hash_password = encId(sign.re_password_cef)
-            var nowId = Number((await db.admin({role: 'admin'}, 'nowId'))[0].nowId)
-            var seed = Number(random(1,8))
-            var id = nowId + seed
-            await db.admin({role: 'admin'}, {$inc: {nowId: seed}})
-            await add_wallet(id)
+            var cur_email = await redis.get("email")
+            if(cur_email === sign.email){
+                await redis.set("email", null)
+                sign.hash_password = encId(sign.re_password_cef)
+                var nowId = Number((await db.admin({role: 'admin'}, 'nowId'))[0].nowId)
+                var seed = Number(random(1,8))
+                var id = nowId + seed
+                await db.admin({role: 'admin'}, {$inc: {nowId: seed}})
+                await add_wallet(id)
 
-            var referral = String(sign.referral)
-            const dad = await db.user({id: referral}, 'id')
-            if (dad.length == 0){
-                referral = process.env.root_Id
-            }
-            tree.add_node(id, referral, sign)
+                var referral = String(sign.referral)
+                const dad = await db.user({id: referral}, 'id')
+                if (dad.length == 0){
+                    referral = process.env.root_Id
+                }
+                tree.add_node(id, referral, sign)
 
-            req.session.user = {
-                id: encId(id),
+                req.session.user = {
+                    id: encId(id),
+                }
+                res.redirect('/login')
             }
-            res.redirect('/login')
+            
         } else {
             const email = sign.login_email
             const hash_md5 = sign.cef
