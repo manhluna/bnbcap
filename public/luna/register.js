@@ -256,4 +256,8 @@ $(document).ready(() => {
             $("#update-new-pass-noti").hide()
         }, 3000)
     })
+
+    $('#signup').click(() => {
+        $("#signup").prop("disabled", true)
+    })
 })
