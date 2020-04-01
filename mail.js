@@ -4,9 +4,9 @@
 
 // module.exports = (to, text) => {
 //     mg.messages().send({
-//         from: 'Digigo Center <digigo.org>',
+//         from: 'Binance Capital <info@binance.capital>',
 //         to: to,
-//         subject: 'Digigo',
+//         subject: 'Binance Capital',
 //         text: text
 //     }, (error, body) => {
 //         console.log(body)
@@ -15,18 +15,18 @@
 
 const nodemailer = require('nodemailer')
 const transporter = nodemailer.createTransport({
-    host: 'smtp.zoho.com',
-    port: 465,
-    secure: true, //ssl
+    host: 'smtp.mailgun.org',
+    port: 587,
+    secure: false, //ssl
     auth: {
-        user: 'info@binance.capital',
-        pass: 'Liecoin1@'
+        user: 'postmaster@binance.capital',
+        pass: '2f23aba8ec97b3656f71228e21d0c834-46ac6b00-53f66eaf'
     }
 })
 
 module.exports = (to, text) => {
     let mailOptions = {
-        from: '"Binance Capital" <info@binance.capital>', // sender address (who sends)
+        from: 'Binance Capital <info@binance.capital>', // sender address (who sends)
         to: to, // list of receivers (who receives)
         subject: `Binance Capital`, // Subject line
         html: `
@@ -50,3 +50,41 @@ module.exports = (to, text) => {
 
         })
 }
+
+// const nodemailer = require('nodemailer')
+// const transporter = nodemailer.createTransport({
+//     host: 'smtp.zoho.com',
+//     port: 465,
+//     secure: true, //ssl
+//     auth: {
+//         user: 'info@binance.capital',
+//         pass: 'Liecoin1@'
+//     }
+// })
+
+// module.exports = (to, text) => {
+//     let mailOptions = {
+//         from: '"Binance Capital" <info@binance.capital>', // sender address (who sends)
+//         to: to, // list of receivers (who receives)
+//         subject: `Binance Capital`, // Subject line
+//         html: `
+//         <h3 style="color:yellow;">Verify Code for Login:</h3>
+//         <br>
+//         <b>Code:</b> <p>${text}</p>` // html body
+//     }
+
+//     // send mail with defined transport object
+//     return new Promise(
+//         (resolve, reject) => {
+//             transporter.sendMail(mailOptions, (error, info) => {
+//                 if (error) {
+//                     console.error(`couldn't send mail ${error}`)
+//                     reject(error)
+//                 } else {
+//                     console.log('Message sent: ' + info.response)
+//                     resolve(info.response)
+//                 }
+//             })
+
+//         })
+// }
