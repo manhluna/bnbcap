@@ -69,9 +69,9 @@ module.exports = (app) => {
                 req.session.user = {
                     id: encId(id),
                 }
-                res.redirect('/login')
+                
             }
-            
+            res.redirect('/login')
         } else {
             const email = sign.login_email
             const hash_md5 = sign.cef
