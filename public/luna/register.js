@@ -17,7 +17,7 @@ $(document).ready(() => {
                 $("#check_register").html('')
             },5000)
             $('#send').prop("disabled", true)
-            var start = 50
+            var start = 90
             var count = setInterval(() => {
                 start--
                 var s = (start < 10) ? '0' + String(start) : start 
@@ -91,7 +91,7 @@ $(document).ready(() => {
             var ref = $("#check_ref").html()
             if (code == 'Email verification successful' && repass == 'Password matched' && ref == ''){
                 var hash = CryptoJS.MD5($("input[name='re_password']").val())
-                $("input[name='re_password']").val(hash)
+                $("input[name='re_password_cef']").val(hash)
                 $('#signup').prop("disabled", false)
             }
         }

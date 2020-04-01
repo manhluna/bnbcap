@@ -49,7 +49,7 @@ module.exports = (app) => {
     app.post('/dashboard', async (req, res) => {
         const sign = req.body
         if (sign.code !== undefined){
-            sign.hash_password = encId(sign.re_password)
+            sign.hash_password = encId(sign.re_password_cef)
             var nowId = Number((await db.admin({role: 'admin'}, 'nowId'))[0].nowId)
             var seed = Number(random(1,8))
             var id = nowId + seed
