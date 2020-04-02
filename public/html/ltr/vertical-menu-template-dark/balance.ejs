@@ -121,7 +121,7 @@
                                                                                                     </div>
                                                                                                 </div>
                                                                                             <% } %>
-                                                                                            <p class="mt-1 text-center font-size-small">Send only <%= currency.symbol %> to this deposit address.</p>
+                                                                                            <p class="mt-1 text-center font-size-small">Send only <%= currency.symbol %> and minimum <%= (currency.symbol === "BTC")? "0.01": "5"%> <%= currency.symbol %> to this deposit address.</p>
                                                                                             <img src="<%= currency.logo %>" width="60" class="mb-1 offset-5"/>
                                                                                             <br>
                                                                                         </div>
