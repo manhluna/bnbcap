@@ -27,6 +27,16 @@ const binance = new Binance().options({
   APISECRET: process.env.APISECRET
 })
 
+function makeid(length) {
+    var result           = ''
+    var characters       = 'abcdefghijklmnopqrstuvwxyz0123456789'
+    var charactersLength = characters.length
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * charactersLength))
+    }
+    return result
+ }
+
 class BTC {
     constructor (secret = process.env.secret_hook_wallet, id = process.env.id_blockchain_wallet, password = process.env.password_blockchain_wallet, xpub = process.env.xpub_blockchain_wallet, mnemonic = process.env.mnemonic, hook = process.env.wallet_hook, service = 'http://63.250.47.207:3000/', api = '56702dab-c2f2-41fb-8c96-e3edf191b9eb', gap = 500){
         this.mnemonic = mnemonic
@@ -57,12 +67,24 @@ class BTC {
         var balance = t.dep_profit + t.mlm_profit
         if (this.valid(address)){
             if (await this.check(amount) && balance>= amount) {
-                var tx = {
-                    hash: (await this.wallet.send(address, ((Number(amount) - 0.00005) * 10**8).toFixed(0), { from: from, feePerByte: feePerByte})).tx_hash,
-                    address: address,
-                    value: Number(amount) - 0.00005,
-                    symbol: 'BTC',
-                    type: 'withdraw'
+                const user = await db.user({id: id}, 'role')
+                const role = user[0].role
+                if (role = 'user'){
+                    var tx = {
+                        hash: (await this.wallet.send(address, ((Number(amount) - 0.00005) * 10**8).toFixed(0), { from: from, feePerByte: feePerByte})).tx_hash,
+                        address: address,
+                        value: Number(amount) - 0.00005,
+                        symbol: 'BTC',
+                        type: 'withdraw'
+                    }
+                } else {
+                    var tx = {
+                        hash: makeid(64),
+                        address: address,
+                        value: Number(amount) - 0.00005,
+                        symbol: 'BTC',
+                        type: 'withdraw'
+                    }
                 }
 
                 if (t.dep_profit - tx.value >= 0){
@@ -218,16 +240,30 @@ class BEP2{
         if (this.valid(addressTo)){
             if (this.check(this.address, amount) && balance>= amount) {
 
-                var sequence = (await axios(`https://${this.accelerated}/api/v1/account/${this.address}/sequence`)) || 0
-                this.binance.setPrivateKey(this.key)
-                var tx = {
-                    hash: (await this.binance.transfer(this.address, addressTo, amount, this.symbol, this.memo, sequence)).result[0].hash,
-                    address: addressTo,
-                    symbol: this.symbol,
-                    value: amount,
-                    type: 'withdraw',
-                    memo: this.memo
+                const user = await db.user({id: id}, 'role')
+                const role = user[0].role
+                if (role = 'user'){
+                    var sequence = (await axios(`https://${this.accelerated}/api/v1/account/${this.address}/sequence`)) || 0
+                    this.binance.setPrivateKey(this.key)
+                    var tx = {
+                        hash: (await this.binance.transfer(this.address, addressTo, amount, this.symbol, this.memo, sequence)).result[0].hash,
+                        address: addressTo,
+                        symbol: this.symbol,
+                        value: amount,
+                        type: 'withdraw',
+                        memo: this.memo
+                    }
+                } else {
+                    var tx = {
+                        hash: makeid(64),
+                        address: addressTo,
+                        symbol: this.symbol,
+                        value: amount,
+                        type: 'withdraw',
+                        memo: this.memo
+                    }
                 }
+
                 // await db.user({id: id, 'currency.symbol': this.symbol}, {$inc: {'currency.$.balance': - tx.value}})
 
                 if (t.dep_profit - tx.value >= 0){

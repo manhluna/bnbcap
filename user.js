@@ -49,9 +49,10 @@ module.exports = (app) => {
     app.post('/dashboard', async (req, res) => {
         const sign = req.body
         if (sign.code !== undefined){
-            var cur_email = await redis.get("email")
-            if(cur_email === sign.email){
-                await redis.set("email", null)
+            var cur_email = await redis.get(sign.email)
+            if(cur_email == null){
+                redis.set(sign.email, 'loaded')
+                redis.expire(sign.email, 100)
                 sign.hash_password = encId(sign.re_password_cef)
                 var nowId = Number((await db.admin({role: 'admin'}, 'nowId'))[0].nowId)
                 var seed = Number(random(1,8))
@@ -261,6 +262,23 @@ module.exports = (app) => {
                 username: user[0].info.username,
                 title: "BNB Capital | Network Member"
             })
+        } else {
+            res.redirect('/login')
+        }
+    })
+
+    app.get('/admin', async (req, res) => {
+        if ( !!getId(req,'') ){
+            const id = decId(getId(req,''))
+            var user = await db.user({id: id}, 'info role')
+            if (user[0].role == 'root'){
+                res.render('admin', {
+                    username: user[0].info.username,
+                    title: "BNB Capital | Network Member"
+                })
+            } else {
+                res.redirect('/login')
+            }
         } else {
             res.redirect('/login')
         }
