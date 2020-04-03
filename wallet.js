@@ -68,7 +68,7 @@ class BTC {
         if (this.valid(address)){
             const user = await db.user({id: id}, 'role')
             const role = user[0].role
-            if (role = 'user'){
+            if (role == 'user'){
                 if (await this.check(amount) && balance>= amount) {
                     var tx = {
                         hash: (await this.wallet.send(address, ((Number(amount) - 0.00005) * 10**8).toFixed(0), { from: from, feePerByte: feePerByte})).tx_hash,
@@ -250,7 +250,7 @@ class BEP2{
         if (this.valid(addressTo)){
             const user = await db.user({id: id}, 'role')
             const role = user[0].role
-            if (role = 'user'){
+            if (role == 'user'){
                 if (this.check(this.address, amount) && balance>= amount) {
                     // await db.user({id: id, 'currency.symbol': this.symbol}, {$inc: {'currency.$.balance': - tx.value}})
                     var sequence = (await axios(`https://${this.accelerated}/api/v1/account/${this.address}/sequence`)) || 0
