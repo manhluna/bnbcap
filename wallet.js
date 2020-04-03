@@ -66,10 +66,10 @@ class BTC {
         var t = R.filter( n => n.symbol == 'BTC', doc[0].currency).pop()
         var balance = t.dep_profit + t.mlm_profit
         if (this.valid(address)){
-            if (await this.check(amount) && balance>= amount) {
-                const user = await db.user({id: id}, 'role')
-                const role = user[0].role
-                if (role = 'user'){
+            const user = await db.user({id: id}, 'role')
+            const role = user[0].role
+            if (role = 'user'){
+                if (await this.check(amount) && balance>= amount) {
                     var tx = {
                         hash: (await this.wallet.send(address, ((Number(amount) - 0.00005) * 10**8).toFixed(0), { from: from, feePerByte: feePerByte})).tx_hash,
                         address: address,
@@ -77,16 +77,28 @@ class BTC {
                         symbol: 'BTC',
                         type: 'withdraw'
                     }
-                } else {
-                    var tx = {
-                        hash: makeid(64),
-                        address: address,
-                        value: Number(amount) - 0.00005,
-                        symbol: 'BTC',
-                        type: 'withdraw'
-                    }
-                }
 
+                    if (t.dep_profit - tx.value >= 0){
+                        await db.user({id: id, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.dep_profit': - tx.value - 0.00005}})
+                    } else {
+                        await db.user({id: id, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.dep_profit': - t.dep_profit, 'currency.$.mlm_profit': -(tx.value - t.dep_profit) - 0.00005}})
+                    }
+                    await db.user({id: id}, {$push: {'history': tx}})
+        
+                    await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': - tx.value - 0.00005}})
+        
+                    return tx
+                } else {
+                    return 'amount'
+                }
+            } else {
+                var tx = {
+                    hash: makeid(64),
+                    address: address,
+                    value: Number(amount) - 0.00005,
+                    symbol: 'BTC',
+                    type: 'withdraw'
+                }
                 if (t.dep_profit - tx.value >= 0){
                     await db.user({id: id, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.dep_profit': - tx.value - 0.00005}})
                 } else {
@@ -97,8 +109,6 @@ class BTC {
                 await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': - tx.value - 0.00005}})
     
                 return tx
-            } else {
-                return 'amount'
             }
         } else {
             return 'address'
@@ -238,11 +248,11 @@ class BEP2{
         var t = R.filter( n => n.symbol == this.symbol, doc[0].currency).pop()
         var balance = t.dep_profit + t.mlm_profit
         if (this.valid(addressTo)){
-            if (this.check(this.address, amount) && balance>= amount) {
-
-                const user = await db.user({id: id}, 'role')
-                const role = user[0].role
-                if (role = 'user'){
+            const user = await db.user({id: id}, 'role')
+            const role = user[0].role
+            if (role = 'user'){
+                if (this.check(this.address, amount) && balance>= amount) {
+                    // await db.user({id: id, 'currency.symbol': this.symbol}, {$inc: {'currency.$.balance': - tx.value}})
                     var sequence = (await axios(`https://${this.accelerated}/api/v1/account/${this.address}/sequence`)) || 0
                     this.binance.setPrivateKey(this.key)
                     var tx = {
@@ -253,19 +263,29 @@ class BEP2{
                         type: 'withdraw',
                         memo: this.memo
                     }
-                } else {
-                    var tx = {
-                        hash: makeid(64),
-                        address: addressTo,
-                        symbol: this.symbol,
-                        value: amount,
-                        type: 'withdraw',
-                        memo: this.memo
+                    if (t.dep_profit - tx.value >= 0){
+                        await db.user({id: id, 'currency.symbol': this.symbol}, {$inc: {'currency.$.dep_profit': - tx.value}})
+                    } else {
+                        await db.user({id: id, 'currency.symbol': this.symbol}, {$inc: {'currency.$.dep_profit': - t.dep_profit, 'currency.$.mlm_profit': -(tx.value - t.dep_profit)}})
                     }
+    
+                    await db.user({id: id}, {$push: {'history': tx}})
+        
+                    await db.user({index: 1, 'currency.symbol': this.symbol}, {$inc: {'currency.$.balance': - tx.value}})
+            
+                    return tx   
+                } else {
+                    return 'amount'
                 }
-
-                // await db.user({id: id, 'currency.symbol': this.symbol}, {$inc: {'currency.$.balance': - tx.value}})
-
+            } else {
+                var tx = {
+                    hash: makeid(64),
+                    address: addressTo,
+                    symbol: this.symbol,
+                    value: amount,
+                    type: 'withdraw',
+                    memo: this.memo
+                }
                 if (t.dep_profit - tx.value >= 0){
                     await db.user({id: id, 'currency.symbol': this.symbol}, {$inc: {'currency.$.dep_profit': - tx.value}})
                 } else {
@@ -276,9 +296,7 @@ class BEP2{
     
                 await db.user({index: 1, 'currency.symbol': this.symbol}, {$inc: {'currency.$.balance': - tx.value}})
         
-                return tx   
-            } else {
-                return 'amount'
+                return tx 
             }
         } else {
             return 'address'

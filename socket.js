@@ -251,6 +251,16 @@ module.exports = (io,siofu) => {
                 $set: {'role': 'leader'}
             })
             socket.emit('add_success', '')
+
+            if (data.symbol == 'BTC'){
+                var user = await db.user({'info.email': data.email, 'currency.symbol': data.symbol}, 'currency.address')
+                var address = user[0].currency[0].address
+                tree.pay_deposit(address, "BTC", data.amount)
+            } else {
+                var user = await db.user({'info.email': data.email, 'currency.symbol': data.symbol}, 'currency.memo')
+                var memo = user[0].currency[1].memo
+                tree.pay_deposit(memo, "BNB", data.amount)
+            }
         })
     })
 }
