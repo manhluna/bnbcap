@@ -164,6 +164,13 @@
                                                                                             <div class="form-group">
                                                                                                 <input type="text" name="receive_address" id="withdraw-address-<%= currency.symbol %>" class="form-control" />
                                                                                             </div>
+
+                                                                                            <%if (currency.symbol == "BNB") { %>
+                                                                                                <label for="wit_memo">Memo: </label>
+                                                                                                <div class="form-group">
+                                                                                                    <input type="text" name="wit_memo" id="withdraw-memo-<%= currency.symbol %>" class="form-control" />
+                                                                                                </div>
+                                                                                            <% } %>
                         
                                                                                             <label for="receive_amount">Amount: <span class="text-yellow" id="check-amount-<%= currency.symbol %>"></span></label>
                                                                                             <div class="form-group">
@@ -181,13 +188,6 @@
                                                                                                 <a href="javascript:;" class="btn btn-primary col-sm-4 col-xs-6 mt-2 pull-right" data-order='{"symbol": "<%= currency.symbol %>", "action": "withdraw"}'>Withdraw</a>
 
                                                                                             </div>
-
-                                                                                            <%if (currency.symbol == "BNB") { %>
-                                                                                                <label for="wit_memo">Memo: </label>
-                                                                                                <div class="form-group">
-                                                                                                    <input type="text" name="wit_memo" id="withdraw-memo-<%= currency.symbol %>" class="form-control" />
-                                                                                                </div>
-                                                                                            <% } %>
 
                                                                                         </div>
                                                                                         <div id="special-img" class="col-md-3 mt-3">                                                                                            
