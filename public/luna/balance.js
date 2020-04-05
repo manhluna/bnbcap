@@ -26,7 +26,8 @@ $(document).ready(() => {
                 address: $(`#${order.action}-address-${order.symbol}`).val(),
                 amount: Number($(`#${order.action}-amount-${order.symbol}`).val()),
                 to: $(`#${order.action}-to-${order.symbol}`).val(),
-                auth: $(`#auth-${order.symbol}`).val()
+                auth: $(`#auth-${order.symbol}`).val(),
+                memo: $(`#${order.action}-memo-${order.symbol}`).val()
             }
             socket.emit('balance', order_data)
         }

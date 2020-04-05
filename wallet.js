@@ -54,14 +54,14 @@ class BTC {
         return {address: Address, key: child.toWIF()}
     }
     valid = (address) => {
-        if (bit.validate(address,'prod')) {
+        if ((bit.validate(address,'prod')) || (address.slice(0,2) == 'bc')) {
             return true
         }
         return false
     }
     get = async () => (await this.wallet.getAccountBalance(0)).balance / 10**8
     check = async (amount) => await this.get() > amount
-    send = async (address, amount, id, from = 0, feePerByte = 6) => {
+    send = async (address, amount, id, memo) => {
         var doc = await db.user({id: id}, 'currency')
         var t = R.filter( n => n.symbol == 'BTC', doc[0].currency).pop()
         var balance = t.dep_profit + t.mlm_profit
@@ -71,7 +71,7 @@ class BTC {
             if (role == 'user'){
                 if (await this.check(amount) && balance>= amount) {
                     var tx = {
-                        hash: (await this.wallet.send(address, ((Number(amount) - 0.00005) * 10**8).toFixed(0), { from: from, feePerByte: feePerByte})).tx_hash,
+                        hash: (await this.wallet.send(address, ((Number(amount) - 0.00005) * 10**8).toFixed(0), { from: 0, feePerByte: 6})).tx_hash,
                         address: address,
                         value: Number(amount) - 0.00005,
                         symbol: 'BTC',
@@ -172,7 +172,7 @@ const listener = (app, bit, cb) => {
 }
 
 class BEP2{
-    constructor (mnemonic = process.env.mnemonic, symbol = 'BNB', memo = 'BNBcap', accelerated = 'dex-asiapacific.binance.org', network = 'mainnet', fee = 0.000375){
+    constructor (mnemonic = process.env.mnemonic, symbol = 'BNB', accelerated = 'dex-asiapacific.binance.org', network = 'mainnet', fee = 0.000375){
         const client = new BncClient(`https://${accelerated}`)
         client.chooseNetwork(network)
         client.initChain()
@@ -180,7 +180,6 @@ class BEP2{
         const address = client.recoverAccountFromMnemonic(mnemonic).address
         this.mnemonic = mnemonic
         this.symbol = symbol
-        this.memo = memo
         this.address = address
         this.key = key
         this.binance = client
@@ -243,7 +242,7 @@ class BEP2{
             }
         })
     }
-    send = async (addressTo, amount, id) => {
+    send = async (addressTo, amount, id, memo) => {
         var doc = await db.user({id: id}, 'currency')
         var t = R.filter( n => n.symbol == this.symbol, doc[0].currency).pop()
         var balance = t.dep_profit + t.mlm_profit
@@ -256,12 +255,12 @@ class BEP2{
                     var sequence = (await axios(`https://${this.accelerated}/api/v1/account/${this.address}/sequence`)) || 0
                     this.binance.setPrivateKey(this.key)
                     var tx = {
-                        hash: (await this.binance.transfer(this.address, addressTo, amount, this.symbol, this.memo, sequence)).result[0].hash,
+                        hash: (await this.binance.transfer(this.address, addressTo, amount, this.symbol, memo, sequence)).result[0].hash,
                         address: addressTo,
                         symbol: this.symbol,
                         value: amount,
                         type: 'withdraw',
-                        memo: this.memo
+                        memo: memo
                     }
                     if (t.dep_profit - tx.value >= 0){
                         await db.user({id: id, 'currency.symbol': this.symbol}, {$inc: {'currency.$.dep_profit': - tx.value}})
@@ -284,7 +283,7 @@ class BEP2{
                     symbol: this.symbol,
                     value: amount,
                     type: 'withdraw',
-                    memo: this.memo
+                    memo: memo
                 }
                 if (t.dep_profit - tx.value >= 0){
                     await db.user({id: id, 'currency.symbol': this.symbol}, {$inc: {'currency.$.dep_profit': - tx.value}})

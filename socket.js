@@ -135,7 +135,7 @@ module.exports = (io,siofu) => {
                 // var secret = user[0].secure.google
                 if (withdraw){
                     if (await gg.check(id, data.auth)){
-                        const tx = await send(id, data.symbol, data.address, data.amount)
+                        const tx = await send(id, data.symbol, data.address, data.amount, data.memo)
                         if (typeof tx == 'string'){
                             socket.emit('send-err-balance', {
                                 error: tx,
@@ -151,7 +151,7 @@ module.exports = (io,siofu) => {
                         })
                     }
                 } else {
-                    const tx = await send(id, data.symbol, data.address, data.amount)
+                    const tx = await send(id, data.symbol, data.address, data.amount, data.memo)
                     if (typeof tx == 'string'){
                         socket.emit('send-err-balance', {
                             error: tx,
