@@ -74,7 +74,8 @@
                                                 <tbody>
                                                     <% histories.forEach(function(history){ %>
                                                         <tr id="tr-<%= history.symbol %>">
-                                                            <td><%= history.date.toISOString().split('T')[0] + ' ' + history.date.toISOString().split('T')[1].slice(0,5) %></td>
+                                                            <!-- <td><%= history.date.toISOString().split('T')[0] + ' ' + history.date.toISOString().split('T')[1].slice(0,5) %></td> -->
+                                                            <td><%= history.date.getUTCDate() %></td>
                                                             <td><%= history.type %></td>
                                                             <td><%= history.symbol %></td>
                                                             <td><%= history.value.toFixed(3) %></td>
