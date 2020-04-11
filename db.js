@@ -92,7 +92,7 @@ const schemaUser = new Schema({
         value: {type: Number, default: null},
         price: {type: Number, default: null},
         memo: {type: String, default: null}, 
-        date: {type: Date , default: Date.now()}
+        date: {type: Date , default: Date.now}
     }]
 },{
     versionKey: false
