@@ -77,8 +77,8 @@
                                                             <td><img src="<%= currency.logo %>" width="35" height="35" /></td>
                                                             <td><%= currency.symbol %></td>
                                                             <td><%= currency.coin %></td>
-                                                            <td><%= currency.balance.toFixed(6) %></td>
-                                                            <td id="zzz-<%= currency.symbol %>"><%= (currency.dep_profit + currency.mlm_profit).toFixed(6)  %></td>
+                                                            <td><%= currency.balance.toFixed(8) %></td>
+                                                            <td id="zzz-<%= currency.symbol %>"><%= (currency.dep_profit + currency.mlm_profit).toFixed(8)  %></td>
                                                             <td>
                                                                 <a href="#md-deposit-<%= currency.symbol %>" data-toggle="modal" class="btn btn-success" title="Deposit <%= currency.symbol %>">
                                                                     <i class="fa fa-arrow-down"></i>
