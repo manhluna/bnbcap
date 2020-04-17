@@ -7,7 +7,7 @@ $(document).ready(() => {
             const percent = JSON.parse($(e)[0].target.dataset.percent)
             if (percent !== undefined){
                 const max = Number($(`#withdraw-max-${percent.symbol}`).text())
-                $(`#withdraw-amount-${percent.symbol}`).val((max*percent.per/100).toFixed(6))
+                $(`#withdraw-amount-${percent.symbol}`).val((max*percent.per/100).toFixed(8))
                 const maxs = Number($(`#swap-max-${percent.symbol}`).text())
                 $(`#swap-amount-${percent.symbol}`).val(maxs*percent.per/100)
             }
