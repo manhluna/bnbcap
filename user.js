@@ -271,7 +271,7 @@ module.exports = (app) => {
         if ( !!getId(req,'') ){
             const id = decId(getId(req,''))
             var user = await db.user({id: id}, 'info role')
-            const all = await db.user({}, 'id currency.symbol currency.balance list_dad')
+            const all = await db.user({}, 'id info.email currency.symbol currency.balance list_dad')
             const allUser = []
             all.forEach((userIn) => {
                 allUser.push({
@@ -282,6 +282,7 @@ module.exports = (app) => {
                     dad: userIn.list_dad[0]
                 })
             })
+            allUser.splice(0,1)
             if (user[0].role == 'root'){
                 res.render('admin', {
                     username: user[0].info.username,
