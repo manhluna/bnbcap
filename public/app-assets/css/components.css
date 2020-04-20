@@ -16,11 +16,11 @@ html body {
 }
 html body .content {
   padding : 0;
-  position : relative;
+  position: inherit;
   -webkit-transition : 300ms ease all;
-          transition : 300ms ease all;
+  transition : 300ms ease all;
   -webkit-backface-visibility : hidden;
-          backface-visibility : hidden;
+  backface-visibility : hidden;
   min-height : calc(100% - 4rem);
   margin-left : 260px;
 }
