@@ -1457,3 +1457,8 @@ body.dark-layout.horizontal-layout.vertical-overlay-menu .main-menu ul li {
 body.dark-layout.horizontal-layout.vertical-overlay-menu .main-menu ul li a {
   color : #C2C6DC !important;
 }
+@media (max-width: 576px){
+  .modal {
+    z-index: 1100;
+  }
+}
