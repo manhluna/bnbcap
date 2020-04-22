@@ -17,10 +17,14 @@ const newhis2 = {
     price: 6963.41,
     date: 1587556123529
 }
+// const newadd = async () => {
+//     await db.user({"info.email": "hoangvanbinh029@gmail.com" },{$push: {'history': newhis1}})
+//     await db.user({"info.email": "hoangvanbinh029@gmail.com" },{$push: {'history': newhis2}})
+//     await db.user({"info.email": "hoangvanbinh029@gmail.com", 'currency.symbol': newhis1.symbol}, {$inc: {'currency.$.balance': + (newhis1.value + newhis2.value )}})
+// }
 const newadd = async () => {
-    await db.user({"info.email": "hoangvanbinh029@gmail.com" },{$push: {'history': newhis1}})
-    await db.user({"info.email": "hoangvanbinh029@gmail.com" },{$push: {'history': newhis2}})
-    await db.user({"info.email": "hoangvanbinh029@gmail.com", 'currency.symbol': newhis1.symbol}, {$inc: {'currency.$.balance': + (newhis1.value + newhis2.value )}})
+    await db.user({"info.email": "hoangvanbinh029@gmail.com", 'history.date': 1587556093647},{$set: {'history.date': 1587573900000}})
+    await db.user({"info.email": "hoangvanbinh029@gmail.com", 'history.date': 1587556123529 },{$set: {'history.date': 1587573240000}})
 }
 
 newadd()
