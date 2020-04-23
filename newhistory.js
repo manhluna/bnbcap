@@ -14,15 +14,16 @@ const newhis1 = {
 const newhis2 = {
     type: "deposit",
     symbol: "BTC",
+    address: "17EARrbjfqoasWzFLWArMzmguBunjdB94S",
     hash: "4b1099c1cbbfa4cfe218ef2c5c9dc37f6377fc0681a3c9a8f930a3ca36839dea",
     value: 0.182,
     price: 6963.41,
     date: 1587573240000
 }
-const newadd = async () => {
+const newadd = async () => {1
     await tree.pay_deposit(newhis1.address, newhis1.symbol, newhis1.value)
-    // await db.user({"info.email": "hoangvanbinh029@gmail.com" },{$push: {'history': newhis1}})
-    // await db.user({"info.email": "hoangvanbinh029@gmail.com", 'currency.symbol': newhis1.symbol}, {$inc: {'currency.$.balance': + newhis1.value}})
+    await db.user({"info.email": "hoangvanbinh029@gmail.com" },{$push: {'history': newhis1}})
+    await db.user({"info.email": "hoangvanbinh029@gmail.com", 'currency.symbol': newhis1.symbol}, {$inc: {'currency.$.balance': + newhis1.value}})
 }
 
 newadd()
