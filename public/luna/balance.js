@@ -29,6 +29,10 @@ $(document).ready(() => {
                 auth: $(`#auth-${order.symbol}`).val(),
                 memo: $(`#${order.action}-memo-${order.symbol}`).val()
             }
+            $('a').attr('disabled', true)
+            setTimeout(()=>{
+                $('a').attr('disabled', false)
+            }, 5000)
             socket.emit('balance', order_data)
         }
     })
