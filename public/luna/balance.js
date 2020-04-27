@@ -15,9 +15,9 @@ $(document).ready(() => {
     })
 
     $('a').click((e) => {
-        $('a').attr('readonly', true)
+        $('a').attr('disabled', true)
         setTimeout(()=>{
-            $('a').attr('readonly', false)
+            $('a').attr('disabled', false)
         }, 6000)
         var order
         if ($(e)[0].target.dataset.order !== undefined){
