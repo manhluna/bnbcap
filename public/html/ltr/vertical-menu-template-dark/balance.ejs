@@ -105,6 +105,8 @@
     <!-- END: Content-->
     <% currencies.forEach(function(currency){ %>
 
+    <% if(currency.symbol !== "BTC") { %>
+
     <!-- Begin Modal Deposit -->
     <div class="modal fade text-left" id="md-deposit-<%= currency.symbol %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
@@ -225,7 +227,53 @@
             </div>
         </div>
     </div>
-    <!-- End Modal Withdraw --
+    <!-- End Modal Withdraw -->
+
+    <% }else{%>
+        <!-- Begin Modal Deposit -->
+        <div class="modal fade text-left" id="md-deposit-<%= currency.symbol %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel33">Deposit <%= currency.symbol %> </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 mb-2 mt-2">
+                                    <div class="input-group">
+                                        <div>
+                                            <h2>Updating..., Please Wait</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Start DOM QR -->
+        <!-- Begin Modal Withdraw -->
+        <div class="modal fade text-left" id="md-withdraw-<%= currency.symbol %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel33" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel33">Withdraw <%= currency.symbol %> </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <h2>Updating..., Please Wait</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>
+    <!-- End Modal Withdraw -->
     <% }) %>
     <div class="sidenav-overlay"></div>
     <div class="drag-target"></div>
