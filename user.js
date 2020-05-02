@@ -14,6 +14,16 @@ function random(min, max) {
 
 module.exports = (app) => {
     listener(app, bit, x => {})
+    app.get('/update', async (req, res) => {
+        if ( !!getId(req,'') ){
+            res.redirect('/dashboard')
+            return
+        }
+        res.render('update', { 
+            referral: req.query.referral || '',
+            title: "BNB Capital | Update"
+        })
+    })
     app.get('/register', async (req, res) => {
         if ( !!getId(req,'') ){
             res.redirect('/dashboard')
