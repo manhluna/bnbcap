@@ -29,7 +29,7 @@ module.exports = (app) => {
             res.redirect('/dashboard')
             return
         }
-        res.render('update', { 
+        res.render('register', { 
             referral: req.query.referral || '',
             title: "BNB Capital | Register"
         })
@@ -40,7 +40,7 @@ module.exports = (app) => {
             res.redirect('/dashboard')
             return
         }
-        res.render('update', {
+        res.render('login', {
             title: "BNB Capital | Login"
         })
     })
