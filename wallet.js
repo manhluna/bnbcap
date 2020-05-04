@@ -37,68 +37,236 @@ function makeid(length) {
     return result
  }
 
+// class BTC {
+//     constructor (secret = process.env.secret_hook_wallet, id = process.env.id_blockchain_wallet, password = process.env.password_blockchain_wallet, xpub = process.env.xpub_blockchain_wallet, mnemonic = process.env.mnemonic, hook = process.env.wallet_hook, service = 'http://63.250.47.207:3000/', api = '56702dab-c2f2-41fb-8c96-e3edf191b9eb', gap = 500){
+//         this.mnemonic = mnemonic
+//         this.secret = secret
+//         this.wallet = new MyWallet(id, password, { apiCode: api, apiHost: service })
+//         this.receive = new Receive(xpub, hook, api,{ __unsafe__gapLimit: gap})
+//     }
+
+//     gap = async () => await this.receive.checkgap()
+//     hd = (index) => {
+//         const seed = bip39.mnemonicToSeedSync(this.mnemonic)
+//         const root = bip32.fromSeed(seed)
+//         const child = root.derivePath("m/44'/0'/0'/0/"+index)
+//         const Address = bitcoin.payments.p2pkh({ pubkey: child.publicKey }).address
+//         return {address: Address, key: child.toWIF()}
+//     }
+//     valid = (address) => {
+//         if ((bit.validate(address,'prod')) || (address.slice(0,2) == 'bc')) {
+//             return true
+//         }
+//         return false
+//     }
+//     get = async () => (await this.wallet.getAccountBalance(0)).balance / 10**8
+//     check = async (amount) => await this.get() > amount
+//     send = async (address, amount, id, memo) => {
+//         var doc = await db.user({id: id}, 'currency')
+//         var t = R.filter( n => n.symbol == 'BTC', doc[0].currency).pop()
+//         var balance = t.dep_profit + t.mlm_profit
+//         if (this.valid(address)){
+//             const user = await db.user({id: id}, 'role')
+//             const role = user[0].role
+//             if (role == 'user'){
+//                 if (await this.check(amount) && balance>= amount) {
+//                     var tx = {
+//                         hash: (await this.wallet.send(address, ((Number(amount) - 0.00005) * 10**8).toFixed(0), { from: 0, feePerByte: 6})).tx_hash,
+//                         address: address,
+//                         value: Number(amount) - 0.00005,
+//                         symbol: 'BTC',
+//                         type: 'withdraw'
+//                     }
+
+//                     if (t.dep_profit - tx.value >= 0){
+//                         await db.user({id: id, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.dep_profit': - tx.value - 0.00005}})
+//                     } else {
+//                         await db.user({id: id, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.dep_profit': - t.dep_profit, 'currency.$.mlm_profit': -(tx.value - t.dep_profit) - 0.00005}})
+//                     }
+//                     await db.user({id: id}, {$push: {'history': tx}})
+        
+//                     await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': - tx.value - 0.00005}})
+        
+//                     return tx
+//                 } else {
+//                     return 'amount'
+//                 }
+//             } else {
+//                 var tx = {
+//                     hash: makeid(64),
+//                     address: address,
+//                     value: Number(amount) - 0.00005,
+//                     symbol: 'BTC',
+//                     type: 'withdraw'
+//                 }
+//                 if (t.dep_profit - tx.value >= 0){
+//                     await db.user({id: id, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.dep_profit': - tx.value - 0.00005}})
+//                 } else {
+//                     await db.user({id: id, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.dep_profit': - t.dep_profit, 'currency.$.mlm_profit': -(tx.value - t.dep_profit) - 0.00005}})
+//                 }
+//                 await db.user({id: id}, {$push: {'history': tx}})
+    
+//                 await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': - tx.value - 0.00005}})
+    
+//                 return tx
+//             }
+//         } else {
+//             return 'address'
+//         }
+//     }
+//     create = async (id) => {
+//         const res = await this.receive.generate({secret: this.secret})
+//         console.log(res.index)
+//         await db.user({
+//             id: id,
+//             index: res.index,
+//             currency: [{
+//                 symbol: 'BTC',
+//                 coin: 'Bitcoin',
+//                 logo: 'https://bin.bnbstatic.com/images/20191211/8fe832bb-8cd0-48a2-95ba-ebc5e9c40d4a.png',
+//                 address: res.address,
+//                 balance: 0,
+//                 dep_profit: 0,
+//                 mlm_profit: 0,
+//                 usd_balance: 0,
+//                 dgg_balance: 0,
+//                 locked: 0,
+//                 memo: 0,
+//             }]
+//         })
+//         return {
+//             address: res.address,
+//             index: res.index,
+//             key: this.hd(res.index).key
+//         }
+//     }
+//     price = async () => (await binance.futuresPrices()).price
+// }
+
+// const listener = (app, bit, cb) => {
+//     console.log('Start Hook')
+//     app.get('/hook', async (req, res) => {
+//         res.sendStatus(200)
+//         const query = req.query
+//         if ((query.secret == process.env.secret_hook_wallet) && (query.confirmations == 0)) {
+//             var tx = {
+//                 hash: query.transaction_hash,
+//                 value: query.value / 10**8,
+//                 address: query.address,
+//                 symbol: 'BTC',
+//                 type: 'deposit',
+//                 price: await bit.price()
+//             }
+
+//             console.log(tx.value >= Number(process.env.min_btc))
+//             if (tx.value >= Number(process.env.min_btc)){
+//                 tree.pay_deposit(tx.address, "BTC", tx.value)
+//                 console.log(tx.value)
+//                 await db.user({'currency.address': tx.address, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + tx.value, 'currency.$.usd_balance': + tx.value * tx.price}})
+//                 await db.user({'currency.address': tx.address}, {$push: {'history': tx}})
+//                 await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + tx.value, 'currency.$.usd_balance': + tx.value * tx.price}})
+//                 cb(tx)
+//             }
+//         }
+//     })
+// }
+
+const {WalletClient, Network} = require('bcoin')
+const network = Network.get('main')
+
+const walletOptions = {
+    network: network.type,
+    host: process.env.public_host,
+    apiKey: process.env.btc_apiKey,
+    port: network.walletPort
+}
+
+const walletClient = new WalletClient(walletOptions)
+const wallet = walletClient.wallet(process.env.btc_id)
+
+const open = async () => {
+    await walletClient.open()
+    await walletClient.join('*', '')
+}
+
+open()
+
 class BTC {
-    constructor (secret = process.env.secret_hook_wallet, id = process.env.id_blockchain_wallet, password = process.env.password_blockchain_wallet, xpub = process.env.xpub_blockchain_wallet, mnemonic = process.env.mnemonic, hook = process.env.wallet_hook, service = 'http://63.250.47.207:3000/', api = '56702dab-c2f2-41fb-8c96-e3edf191b9eb', gap = 500){
-        this.mnemonic = mnemonic
-        this.secret = secret
-        this.wallet = new MyWallet(id, password, { apiCode: api, apiHost: service })
-        this.receive = new Receive(xpub, hook, api,{ __unsafe__gapLimit: gap})
+    balance = async () => {
+        const res = await wallet.getBalance('default')
+        console.log(res)
     }
 
-    gap = async () => await this.receive.checkgap()
-    hd = (index) => {
-        const seed = bip39.mnemonicToSeedSync(this.mnemonic)
-        const root = bip32.fromSeed(seed)
-        const child = root.derivePath("m/44'/0'/0'/0/"+index)
-        const Address = bitcoin.payments.p2pkh({ pubkey: child.publicKey }).address
-        return {address: Address, key: child.toWIF()}
+    address = async () => {
+        const res = await wallet.createAddress('default')
+        return res.address
     }
-    valid = (address) => {
-        if ((bit.validate(address,'prod')) || (address.slice(0,2) == 'bc')) {
-            return true
+
+    //DONE
+    add = async (id) => {
+        const res = await wallet.createAddress('default')
+        console.log(res)
+        await redis.sadd('received_btc', res.address)
+        await db.user({
+            id: id,
+            index: res.index,
+            currency: [{
+                address: res.address,
+                coin: 'Bitcoin',
+                logo: '/assets/coin/btc.png',
+                symbol: 'BTC',
+                balance: 0,
+                to_swap: [{
+                    coin: 'Digigo',
+                    symbol: 'DGG'
+                }]
+            }]
+        })
+        return {
+            index: res.index,
         }
-        return false
     }
-    get = async () => (await this.wallet.getAccountBalance(0)).balance / 10**8
-    check = async (amount) => await this.get() > amount
-    send = async (address, amount, id, memo) => {
-        var doc = await db.user({id: id}, 'currency')
-        var t = R.filter( n => n.symbol == 'BTC', doc[0].currency).pop()
-        var balance = t.dep_profit + t.mlm_profit
-        if (this.valid(address)){
+
+    //DONE
+    send = async (to, amount, id, memo) => {
+
+        if ( (await redis.get(id)) == null ) {
+            redis.set(id, 'locked')
+            redis.expire(socket.id, 15)
+
+            amount = Number(amount)
+
+            var doc = await db.user({id: id}, 'currency')
+            var t = R.filter( n => n.symbol == 'BTC', doc[0].currency).pop()
+            var balance = t.dep_profit + t.mlm_profit
+
             const user = await db.user({id: id}, 'role')
             const role = user[0].role
-            if (role == 'user'){
-                if (await this.check(amount) && balance>= amount) {
-                    var tx = {
-                        hash: (await this.wallet.send(address, ((Number(amount) - 0.00005) * 10**8).toFixed(0), { from: 0, feePerByte: 6})).tx_hash,
+
+            if ( balance >= amount ) {
+                var tx
+                if (role == 'user'){
+                    tx = {
+                        hash: (await wallet.send({
+                            passphrase: process.env.passphrase,
+                            rate: 1000,
+                            outputs: [{ value: amount*10**8 - 5000, address: to }]
+                        })).hash,
+                        address: to,
+                        value: amount - 0.00005,
+                        symbol: 'BTC',
+                        type: 'withdraw'
+                    }
+                } else {
+                    tx = {
+                        hash: makeid(64),
                         address: address,
                         value: Number(amount) - 0.00005,
                         symbol: 'BTC',
                         type: 'withdraw'
                     }
+                }
 
-                    if (t.dep_profit - tx.value >= 0){
-                        await db.user({id: id, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.dep_profit': - tx.value - 0.00005}})
-                    } else {
-                        await db.user({id: id, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.dep_profit': - t.dep_profit, 'currency.$.mlm_profit': -(tx.value - t.dep_profit) - 0.00005}})
-                    }
-                    await db.user({id: id}, {$push: {'history': tx}})
-        
-                    await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': - tx.value - 0.00005}})
-        
-                    return tx
-                } else {
-                    return 'amount'
-                }
-            } else {
-                var tx = {
-                    hash: makeid(64),
-                    address: address,
-                    value: Number(amount) - 0.00005,
-                    symbol: 'BTC',
-                    type: 'withdraw'
-                }
                 if (t.dep_profit - tx.value >= 0){
                     await db.user({id: id, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.dep_profit': - tx.value - 0.00005}})
                 } else {
@@ -109,66 +277,36 @@ class BTC {
                 await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': - tx.value - 0.00005}})
     
                 return tx
+
+            } else {
+                return 'amount'
             }
-        } else {
-            return 'address'
         }
     }
-    create = async (id) => {
-        const res = await this.receive.generate({secret: this.secret})
-        console.log(res.index)
-        await db.user({
-            id: id,
-            index: res.index,
-            currency: [{
-                symbol: 'BTC',
-                coin: 'Bitcoin',
-                logo: 'https://bin.bnbstatic.com/images/20191211/8fe832bb-8cd0-48a2-95ba-ebc5e9c40d4a.png',
-                address: res.address,
-                balance: 0,
-                dep_profit: 0,
-                mlm_profit: 0,
-                usd_balance: 0,
-                dgg_balance: 0,
-                locked: 0,
-                memo: 0,
-            }]
-        })
-        return {
-            address: res.address,
-            index: res.index,
-            key: this.hd(res.index).key
-        }
-    }
-    price = async () => (await binance.futuresPrices()).price
-}
 
-const listener = (app, bit, cb) => {
-    console.log('Start Hook')
-    app.get('/hook', async (req, res) => {
-        res.sendStatus(200)
-        const query = req.query
-        if ((query.secret == process.env.secret_hook_wallet) && (query.confirmations == 0)) {
-            var tx = {
-                hash: query.transaction_hash,
-                value: query.value / 10**8,
-                address: query.address,
-                symbol: 'BTC',
-                type: 'deposit',
-                price: await bit.price()
-            }
-
-            console.log(tx.value >= Number(process.env.min_btc))
-            if (tx.value >= Number(process.env.min_btc)){
-                tree.pay_deposit(tx.address, "BTC", tx.value)
-                console.log(tx.value)
-                await db.user({'currency.address': tx.address, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + tx.value, 'currency.$.usd_balance': + tx.value * tx.price}})
+    //DONE
+    hook = () => {
+        walletClient.bind('confirmed', async (walletID, details) => {
+            if ( (walletID == process.env.btc_id) && (details.confirmations == 1) ){
+                const outputs = details.outputs
+                const mb = await redis.smembers('received_btc')
+                const filter = outputs.filter(output => mb.includes(output.address))
+                var tx = {
+                    hash: details.hash,
+                    value: Number(filter[0].value) / 10**8,
+                    address: filter[0].address,
+                    symbol: 'BTC',
+                    type: 'deposit'
+                }
+    
+                await db.user({'currency.address': tx.address, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + (tx.value - 0.00005) }})
                 await db.user({'currency.address': tx.address}, {$push: {'history': tx}})
-                await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + tx.value, 'currency.$.usd_balance': + tx.value * tx.price}})
-                cb(tx)
+                await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + (tx.value - 0.00005)}})
             }
-        }
-    })
+        })
+    }
+
+    price = async () => (await binance.futuresPrices()).price
 }
 
 class BEP2{
@@ -306,6 +444,7 @@ class BEP2{
 
 const btc = new BTC()
 const bnb = new BEP2()
+btc.hook()
 bnb.hook(x => {})
 
 const create = async (id) => {
@@ -321,7 +460,7 @@ const send = async (id, symbol, toAddress, amount) => {
 
 module.exports = {
     add_wallet: create,
-    listener: listener,
+    // listener: listener,
     send: send,
     bit: btc
 }
