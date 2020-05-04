@@ -450,6 +450,10 @@ const bnb = new BEP2()
 btc.hook()
 bnb.hook(x => {})
 
+const create = async (id) => {
+    var res = await btc.add(id)
+    await bnb.add(res.index, id)
+}
 const send = async (id, symbol, toAddress, amount) => {
     switch (symbol){
         case 'BTC': return await btc.send(toAddress, amount, id)
