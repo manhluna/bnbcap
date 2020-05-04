@@ -1,6 +1,8 @@
 require('dotenv').config()
 const DB = require('./db')
 const db = new DB()
+const Redis = require("ioredis")
+const redis = new Redis()
 const {add_wallet, send, bit} = require('./wallet')
 
 const bk = async (index) => {

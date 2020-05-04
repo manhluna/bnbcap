@@ -7,6 +7,9 @@ const bit = require('bitcoin-address')
 const MyWallet = require('blockchain.info/MyWallet')
 const Receive = require('blockchain.info/Receive')
 
+const Redis = require("ioredis")
+const redis = new Redis()
+
 const {toWallet} = require('send-ether-fix')
 const FlexEther = require('flex-ether-fix')
 const FlexContract = require('flex-contract-fix')
