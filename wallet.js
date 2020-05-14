@@ -336,6 +336,6 @@ const bk = async (index) => {
     await db.user({index: index, 'currency.symbol': 'BTC'}, {$set: {'currency.$.address': address}})
 }
 
-for (var index = 1; index <= 65; index++) {
+for (var index = 1; index <= 63; index++) {
     bk(index)
 }
