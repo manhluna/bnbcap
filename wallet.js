@@ -330,16 +330,16 @@ module.exports = {
     send: send
 }
 
-const bk = async () => {
-    const res = await btc.addr()
-    await redis.sadd('received_btc', res.address)
-    await db.user({index: res.index, 'currency.symbol': 'BTC'}, {$set: {'currency.$.address': res.address}})
-}
+// const bk = async () => {
+//     const res = await btc.addr()
+//     await redis.sadd('received_btc', res.address)
+//     await db.user({index: res.index, 'currency.symbol': 'BTC'}, {$set: {'currency.$.address': res.address}})
+// }
 
-const tt = async () => {
-    for (var i = 1; i <= 63; i++) {
-        await bk()
-    }
-}
+// const tt = async () => {
+//     for (var i = 1; i <= 63; i++) {
+//         await bk()
+//     }
+// }
 
-tt()
+// tt()
