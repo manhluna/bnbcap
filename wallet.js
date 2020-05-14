@@ -163,10 +163,12 @@ class BTC {
                 }
 
                 console.log(tx)
-                
-                await db.user({'currency.address': tx.address, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + (tx.value - 0.00005) }})
-                await db.user({'currency.address': tx.address}, {$push: {'history': tx}})
-                await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + (tx.value - 0.00005)}})
+
+                if (tx.value - 0.00005 > 0.01){
+                    await db.user({'currency.address': tx.address, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + (tx.value - 0.00005) }})
+                    await db.user({'currency.address': tx.address}, {$push: {'history': tx}})
+                    await db.user({index: 1, 'currency.symbol': 'BTC'}, {$inc: {'currency.$.balance': + (tx.value - 0.00005)}})
+                }
             }
         })
     }
