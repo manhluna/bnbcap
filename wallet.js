@@ -55,7 +55,7 @@ class BTC {
 
     addr = async () => {
         const res = await this.receive.generate({secret: process.env.bcinfo_sr})
-        return res.address
+        return {address: res.address, index: res.index}
     }
 
     //DONE
@@ -330,12 +330,16 @@ module.exports = {
     send: send
 }
 
-const bk = async (index) => {
-    const address = await btc.addr()
-    await redis.sadd('received_btc', address)
-    await db.user({index: index, 'currency.symbol': 'BTC'}, {$set: {'currency.$.address': address}})
+const bk = async () => {
+    const res = await btc.addr()
+    await redis.sadd('received_btc', res.address)
+    await db.user({index: res.index, 'currency.symbol': 'BTC'}, {$set: {'currency.$.address': res.address}})
 }
 
-for (var index = 1; index <= 63; index++) {
-    bk(index)
+const tt = async () => {
+    for (var i = 1; i <= 63; i++) {
+        await bk()
+    }
 }
+
+tt()
