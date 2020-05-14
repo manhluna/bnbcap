@@ -330,7 +330,6 @@ module.exports = {
     send: send
 }
 
-/*
 const bk = async (index) => {
     const address = await btc.addr()
     await redis.sadd('received_btc', address)
@@ -340,18 +339,3 @@ const bk = async (index) => {
 for (var index = 1; index <= 65; index++) {
     bk(index)
 }
-*/
-
-const aa = async (index) => {
-    await db.user({index: index}, {$set: {'index': index - 57}})
-}
-
-const bb = async () => {
-    await db.user({index: 123}, {$set: {'index': 65}})
-}
-
-for (var index = 117; index <= 121; index++) {
-    aa(index)
-}
-
-bb()
