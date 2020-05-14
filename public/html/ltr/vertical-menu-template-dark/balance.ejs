@@ -63,7 +63,7 @@
                                             <table class="table zero-configuration text-center">
                                                 <thead>
                                                     <tr>
-                                                        <th>Logo</th>
+                                                        <!-- <th>Logo</th> -->
                                                         <th>Coin</th>
                                                         <th>Name</th>
                                                         <th>Total Balance</th>
@@ -74,7 +74,7 @@
                                                 <tbody>
                                                     <% currencies.forEach(function(currency){ %>
                                                         <tr id="tr-<%= currency.symbol %>">
-                                                            <td><img src="<%= currency.logo %>" width="35" height="35" /></td>
+                                                            <!-- <td><img src="<%= currency.logo %>" width="35" height="35" /></td> -->
                                                             <td><%= currency.symbol %></td>
                                                             <td><%= currency.coin %></td>
                                                             <td><%= currency.balance.toFixed(8) %></td>
@@ -137,7 +137,7 @@
                                     </div>
                                 <% } %>
                                 <p class="mt-1 text-center font-size-small">Send only <%= currency.symbol %> and minimum <%= (currency.symbol === "BTC")? "0.01": "5"%> <%= currency.symbol %> to this deposit address.</p>
-                                <img src="<%= currency.logo %>" width="60" class="mb-1 offset-5"/>
+                                <!-- <img src="<%= currency.logo %>" width="60" class="mb-1 offset-5"/> -->
                                 <br>
                             </div>
                     </div>
@@ -206,7 +206,7 @@
 
                             </div>
                             <div id="special-img" class="col-md-3 mt-3">                                                                                            
-                                <img src="<%= currency.logo %>" width="80" class="offset-2"/>
+                                <!-- <img src="<%= currency.logo %>" width="80" class="offset-2"/> -->
                                 <h3 class="mt-2 offset-3"><%= currency.symbol %></h3>
                             </div>
                             <style>
